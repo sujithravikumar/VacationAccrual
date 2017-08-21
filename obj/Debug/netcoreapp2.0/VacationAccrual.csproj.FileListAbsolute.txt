@@ -1,0 +1,12 @@
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/bin/Debug/netcoreapp2.0/libe_sqlite3.dylib
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/bin/Debug/netcoreapp2.0/VacationAccrual.deps.json
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/bin/Debug/netcoreapp2.0/VacationAccrual.runtimeconfig.json
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/bin/Debug/netcoreapp2.0/VacationAccrual.runtimeconfig.dev.json
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/bin/Debug/netcoreapp2.0/VacationAccrual.dll
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/bin/Debug/netcoreapp2.0/VacationAccrual.pdb
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/obj/Debug/netcoreapp2.0/VacationAccrual.csprojResolveAssemblyReference.cache
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/obj/Debug/netcoreapp2.0/VacationAccrual.csproj.CoreCompileInputs.cache
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/obj/Debug/netcoreapp2.0/VacationAccrual.AssemblyInfoInputs.cache
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/obj/Debug/netcoreapp2.0/VacationAccrual.AssemblyInfo.cs
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/obj/Debug/netcoreapp2.0/VacationAccrual.dll
+/Users/sujithravikumar/Projects/VacationAccrual/VacationAccrual/obj/Debug/netcoreapp2.0/VacationAccrual.pdb
