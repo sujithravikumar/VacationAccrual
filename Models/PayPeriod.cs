@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Globalization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace VacationAccrual.Models
 {
@@ -12,6 +13,7 @@ namespace VacationAccrual.Models
         public double Accural { get; set; }
         public double Take { get; set; }
         public double Balance { get; set; }
+        public string StartDate { get; set;}
 
         public PayPeriod(string period, double accural, double take, double balance)
         {
@@ -21,7 +23,31 @@ namespace VacationAccrual.Models
             this.Balance = balance;
         }
 
-        PayPeriod() { }
+        public static List<SelectListItem> GetStartDateList()
+        {
+            List<SelectListItem> startDateList = new List<SelectListItem>();
+            DateTime startDate = DateTime.Now;
+
+            int diff = DayOfWeek.Sunday - startDate.DayOfWeek;
+            DateTime weekBegin = startDate.AddDays(diff);
+
+            var calendar = new GregorianCalendar();
+            var weekNumber = calendar.GetWeekOfYear(weekBegin, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
+            int biweeklyKey = weekNumber % 2;
+
+            if (biweeklyKey == 0)
+            {
+                startDateList.Add(new SelectListItem { Text = weekBegin.ToString("MM-dd-yy") });
+                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-7).ToString("MM-dd-yy") });   
+            }
+            else
+            {
+                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-7).ToString("MM-dd-yy") });
+                startDateList.Add(new SelectListItem { Text = weekBegin.ToString("MM-dd-yy") });
+            }
+            
+            return startDateList;
+        } 
 
         public static List<PayPeriod> GetPeriodList(DateTime startDate, double accural, int count)
         {
@@ -34,7 +60,7 @@ namespace VacationAccrual.Models
             var weekNumber = calendar.GetWeekOfYear(weekBegin, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
             int biweeklyKey = weekNumber % 2;
 
-            if (biweeklyKey == 0)
+            if (biweeklyKey != 0)
             {
                 weekBegin = weekBegin.AddDays(-7);
             }

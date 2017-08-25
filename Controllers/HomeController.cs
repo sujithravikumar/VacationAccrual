@@ -12,9 +12,10 @@ namespace VacationAccrual.Controllers
     {
         public IActionResult Index()
         {
-            List<PayPeriod> periodList = PayPeriod.GetPeriodList(DateTime.Parse("08/15/2017"), 4.62, 10);
+            ViewBag.ListofPeriods = PayPeriod.GetPeriodList(DateTime.Parse("08/15/2017"), 4.62, 10);
+            ViewBag.ListofStartDates = PayPeriod.GetStartDateList();
 
-            return View(periodList);
+            return View();
         }
 
         public IActionResult Error()

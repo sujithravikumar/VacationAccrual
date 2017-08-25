@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VacationAccrual.Models.PayPeriod>
+﻿@model VacationAccrual.Models.PayPeriod
 
 @{
     ViewBag.Title = "Forecast";
@@ -8,9 +8,12 @@
 <div style="text-align:center"><h1>Vacation/PTO Accrual Calculator/Forecast</h1></div>
 <br />
 <div style="text-align:center">
-    <label style="font-size:25px">Vacation Accrual for a period:</label> &nbsp;&nbsp;
-    <input id="VacationAccrual" maxlength="4" style="width:60px; font-size:25px;" /> &nbsp;
-	<label style="font-size:25px; font-style:italic">(hours)</label>
+    <label style="font-size:25px">Current pay period Startdate:</label> &nbsp;&nbsp;
+    <select asp-for="StartDate" asp-items="ViewBag.ListofStartDates"></select>&nbsp;
+    <label style="font-size:25px">and Accrual:</label> &nbsp;&nbsp;
+    <input id="accrualTb" maxlength="4" style="width:60px; font-size:25px;" /> &nbsp;
+	<label style="font-size:25px; font-style:italic">(hours)</label>&nbsp;&nbsp;
+    <button class="btn" id="goBtn">Go</button>
 </div>
 <br /><br />
 <table class="table table-bordered">
@@ -23,17 +26,14 @@
 		</tr>
 	</thead>
 	<tbody>
-		@if(Model != null && Model.Count() > 0)
-		{
-		    foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Period</td>
-                    <td>@item.Accural</td>
-                    <td>@item.Take</td>
-                    <td>@item.Balance</td>
-                </tr>
-            }
-		}
+        @foreach (var item in @ViewBag.ListofPeriods)
+        {
+            <tr>
+                <td>@item.Period</td>
+                <td>@item.Accural</td>
+                <td>@item.Take</td>
+                <td>@item.Balance</td>
+            </tr>
+        }
 	</tbody>
 </table>
