@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace VacationAccrual.Models
 {
@@ -26,10 +27,22 @@ namespace VacationAccrual.Models
         {
             List<PayPeriod> periodList = new List<PayPeriod>();
 
+            int diff = DayOfWeek.Sunday - startDate.DayOfWeek;
+            DateTime weekBegin = startDate.AddDays(diff);
+
+            var calendar = new GregorianCalendar();
+            var weekNumber = calendar.GetWeekOfYear(weekBegin, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
+            int biweeklyKey = weekNumber % 2;
+
+            if (biweeklyKey == 0)
+            {
+                weekBegin = weekBegin.AddDays(-7);
+            }
+
             for (int i = 0; i < count; i++)
             {
-                periodList.Add(new PayPeriod(startDate.ToString("MM-dd-yy") + " - " + startDate.AddDays(11).ToString("MM-dd-yy"), accural, 0.0, 0.0));
-                startDate = startDate.AddDays(14);
+                periodList.Add(new PayPeriod(weekBegin.ToString("MM-dd-yy") + " - " + weekBegin.AddDays(13).ToString("MM-dd-yy"), accural, 0.0, 0.0));
+                weekBegin = weekBegin.AddDays(14);
 			}
 
             return periodList;
