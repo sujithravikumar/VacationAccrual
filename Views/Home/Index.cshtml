@@ -7,14 +7,22 @@
 <br />
 <div style="text-align:center"><h1>Vacation/PTO Accrual Calculator/Forecast</h1></div>
 <br />
-<div style="text-align:center">
-    <label style="font-size:25px">Current pay period Startdate:</label> &nbsp;&nbsp;
-    <select asp-for="StartDate" asp-items="ViewBag.ListofStartDates"></select>&nbsp;
-    <label style="font-size:25px">and Accrual:</label> &nbsp;&nbsp;
-    <input id="accrualTb" maxlength="4" style="width:60px; font-size:25px;" /> &nbsp;
-	<label style="font-size:25px; font-style:italic">(hours)</label>&nbsp;&nbsp;
-    <button class="btn" id="goBtn">Go</button>
-</div>
+<table class="table-centered-padded">
+    <tr>
+        <td><label style="font-size:25px">Pay period Startdate:</label></td>
+        <td><label style="font-size:25px">Accrual:</label></td>
+    </tr>
+    <tr>
+        <td><select asp-for="StartDate" asp-items="PayPeriod.GetStartDateList()"></select></td>
+        <td>
+            <input id="accrualTb" maxlength="4" style="width:60px; font-size:25px;" /> &nbsp;
+	        <label style="font-size:20px">(hours)</label>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"><button class="btn" id="goBtn">Go</button></td>
+    </tr>
+</table>
 <br /><br />
 <table class="table table-bordered">
 	<thead>
