@@ -4,6 +4,7 @@
     ViewBag.Title = "Forecast";
 }
 
+<form method="post">
 <div style="text-align:center"><h2>Vacation/PTO Accrual Calculator/Forecast</h2></div>
 <br />
 <div style="text-align:center">
@@ -12,9 +13,14 @@
     <label style="font-size:18px">Accrual:</label>&nbsp;
     <input id="accrualTb" maxlength="4" style="width:40px; font-size:15px;" />&nbsp;
 	<label style="font-size:18px">(hours)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button class="btn" id="goBtn" style="font-size:15px">Go</button>
+    <label style="font-size:18px">Balance:</label>&nbsp;
+    <input id="balanceTb" maxlength="5" style="width:50px; font-size:15px;" />&nbsp;
+	<label style="font-size:18px">(hours)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="submit" value="Go" class="btn" formaction="/Home/Result" />
 </div>
 <br /><br />
+</form>
+
 <table class="table table-bordered">
 	<thead>
 		<tr>

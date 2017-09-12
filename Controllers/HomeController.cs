@@ -13,8 +13,14 @@ namespace VacationAccrual.Controllers
         public IActionResult Index()
         {
             ViewBag.ListofPeriods = PayPeriod.GetPeriodList(DateTime.Parse("08/15/2017"), 4.62, 10);
-            
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Result()
+        {
+            ViewBag.ListofPeriods = PayPeriod.GetPeriodList(DateTime.Parse("09/11/2017"), 5.55, 5);
+            return View("Index");
         }
 
         public IActionResult Error()
