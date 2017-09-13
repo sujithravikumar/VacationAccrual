@@ -49,26 +49,17 @@ namespace VacationAccrual.Models
             return startDateList;
         } 
 
-        public static List<PayPeriod> GetPeriodList(DateTime startDate, double accural, int count)
+        public static List<PayPeriod> GetPeriodList(DateTime startDate, double accural, double balance, int count)
         {
             List<PayPeriod> periodList = new List<PayPeriod>();
 
-            int diff = DayOfWeek.Sunday - startDate.DayOfWeek;
-            DateTime weekBegin = startDate.AddDays(diff);
-
-            var calendar = new GregorianCalendar();
-            var weekNumber = calendar.GetWeekOfYear(weekBegin, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
-            int biweeklyKey = weekNumber % 2;
-
-            if (biweeklyKey != 0)
-            {
-                weekBegin = weekBegin.AddDays(-7);
-            }
+            DateTime weekBegin = startDate;
 
             for (int i = 0; i < count; i++)
             {
-                periodList.Add(new PayPeriod(weekBegin.ToString("MM-dd-yy") + " - " + weekBegin.AddDays(13).ToString("MM-dd-yy"), accural, 0.0, 0.0));
+                periodList.Add(new PayPeriod(weekBegin.ToString("MM-dd-yy") + " - " + weekBegin.AddDays(13).ToString("MM-dd-yy"), accural, 0.0, balance));
                 weekBegin = weekBegin.AddDays(14);
+                balance += accural;
 			}
 
             return periodList;

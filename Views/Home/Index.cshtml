@@ -4,41 +4,46 @@
     ViewBag.Title = "Forecast";
 }
 
-<form method="post">
 <div style="text-align:center"><h2>Vacation/PTO Accrual Calculator/Forecast</h2></div>
 <br />
-<div style="text-align:center">
-    <label style="font-size:18px">Pay period Startdate:</label>&nbsp;
-    <select style="font-size:15px" asp-for="StartDate" asp-items="PayPeriod.GetStartDateList()"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label style="font-size:18px">Accrual:</label>&nbsp;
-    <input id="accrualTb" maxlength="4" style="width:40px; font-size:15px;" />&nbsp;
-	<label style="font-size:18px">(hours)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label style="font-size:18px">Balance:</label>&nbsp;
-    <input id="balanceTb" maxlength="5" style="width:50px; font-size:15px;" />&nbsp;
-	<label style="font-size:18px">(hours)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="submit" value="Go" class="btn" formaction="/Home/Result" />
-</div>
-<br /><br />
-</form>
 
-<table class="table table-bordered">
-	<thead>
-		<tr>
-			<th>Period</th>
-            <th>Accural</th>
-            <th>Take</th>
-            <th>Balance</th>
-		</tr>
-	</thead>
-	<tbody>
-        @foreach (var item in @ViewBag.ListofPeriods)
-        {
+@using(Html.BeginForm())
+{
+    <div style="text-align:center">
+        <label style="font-size:18px">Pay period Startdate:</label>&nbsp;
+        <select name="StartDate" style="font-size:15px" asp-for="StartDate" asp-items="PayPeriod.GetStartDateList()"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label style="font-size:18px">Accrual:</label>&nbsp;
+        <input name="Accural" maxlength="4" style="width:40px; font-size:15px;" />&nbsp;
+        <label style="font-size:18px">(hours)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label style="font-size:18px">Balance:</label>&nbsp;
+        <input name="Balance" maxlength="5" style="width:50px; font-size:15px;" />&nbsp;
+        <label style="font-size:18px">(hours)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="Submit" class="btn" formaction="/Home/Result" />
+    </div>
+    <br /><br />
+}
+
+@if (@ViewBag.ListofPeriods != null) 
+{
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>@item.Period</td>
-                <td>@item.Accural</td>
-                <td>@item.Take</td>
-                <td>@item.Balance</td>
+                <th>Period</th>
+                <th>Accural</th>
+                <th>Take</th>
+                <th>Balance</th>
             </tr>
-        }
-	</tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in @ViewBag.ListofPeriods)
+            {
+                <tr>
+                    <td>@item.Period</td>
+                    <td>@item.Accural</td>
+                    <td>@item.Take</td>
+                    <td>@item.Balance</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

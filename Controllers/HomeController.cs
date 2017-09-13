@@ -12,14 +12,17 @@ namespace VacationAccrual.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.ListofPeriods = PayPeriod.GetPeriodList(DateTime.Parse("08/15/2017"), 4.62, 10);
+            ViewBag.ListofPeriods = null;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Result()
+        public IActionResult Result(string StartDate, string Accural, string Balance)
         {
-            ViewBag.ListofPeriods = PayPeriod.GetPeriodList(DateTime.Parse("09/11/2017"), 5.55, 5);
+            DateTime startDate = DateTime.Parse(StartDate);
+            Double accural = String.IsNullOrWhiteSpace(Accural) ? 0.0 : Double.Parse(Accural);
+            Double balance = String.IsNullOrWhiteSpace(Balance) ? 0.0 : Double.Parse(Balance);
+            ViewBag.ListofPeriods = PayPeriod.GetPeriodList(startDate, accural, balance, 5);
             return View("Index");
         }
 
