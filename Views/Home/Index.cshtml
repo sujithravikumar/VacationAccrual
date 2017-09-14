@@ -18,15 +18,15 @@
         <label style="font-size:18px">Balance:</label>&nbsp;
         <input name="Balance" maxlength="5" style="width:50px; font-size:15px;" />&nbsp;
         <label style="font-size:18px">(hours)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" value="Submit" class="btn" formaction="/Home/Result" />
+        <input type="submit" value="Submit" formaction="/Home/Result" />
     </div>
     <br /><br />
 }
 
 @if (@ViewBag.ListofPeriods != null) 
 {
-    <table class="table table-bordered">
-        <thead>
+    <table style="width: auto; font-size:18px;" class="table table-bordered table-hover">
+        <thead> 
             <tr>
                 <th>Period</th>
                 <th>Accural</th>
