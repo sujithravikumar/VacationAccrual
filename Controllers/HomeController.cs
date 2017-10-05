@@ -10,23 +10,34 @@ namespace VacationAccrual.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index(PayPeriodList payPeriod)
         {
-            ViewBag.ListofPeriods = null;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Result(string StartDate, string Accural, string Balance)
+        public ActionResult Index(string Command, string StartDate, string Accural, string Balance, PayPeriodList payPeriod)
         {
             DateTime startDate = DateTime.Parse(StartDate);
             Double accural = String.IsNullOrWhiteSpace(Accural) ? 0 : Double.Parse(Accural);
             Double balance = String.IsNullOrWhiteSpace(Balance) ? 0 : Double.Parse(Balance);
-            ViewBag.ListofPeriods = PayPeriod.GetPeriodList(startDate, accural, balance, 10);
-            return View("Index");
+            
+            List<PayPeriod> periodList = new List<PayPeriod>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                periodList.Add(new PayPeriod(startDate.ToString("MM-dd-yy") + " - " + startDate.AddDays(13).ToString("MM-dd-yy"), accural, 0.0, balance));
+                startDate = startDate.AddDays(14);
+                balance += accural;
+			}
+
+            PayPeriodList objPayPeriod = new PayPeriodList();
+            objPayPeriod.PayPeriods = periodList;
+
+            return View("Index", objPayPeriod);
         }
 
-        public IActionResult Error()
+        public ActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

@@ -22,6 +22,11 @@ namespace VacationAccrual.Models
             this.Take = take;
             this.Balance = balance;
         }
+    }
+
+    public class PayPeriodList
+    {
+        public List<PayPeriod> PayPeriods { get; set; }
 
         public static List<SelectListItem> GetStartDateList()
         {
@@ -47,22 +52,6 @@ namespace VacationAccrual.Models
             }
             
             return startDateList;
-        } 
-
-        public static List<PayPeriod> GetPeriodList(DateTime startDate, double accural, double balance, int count)
-        {
-            List<PayPeriod> periodList = new List<PayPeriod>();
-
-            DateTime weekBegin = startDate;
-
-            for (int i = 0; i < count; i++)
-            {
-                periodList.Add(new PayPeriod(weekBegin.ToString("MM-dd-yy") + " - " + weekBegin.AddDays(13).ToString("MM-dd-yy"), accural, 0.0, balance));
-                weekBegin = weekBegin.AddDays(14);
-                balance += accural;
-			}
-
-            return periodList;
         }
     }
 }
