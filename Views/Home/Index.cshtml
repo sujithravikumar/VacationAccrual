@@ -1,4 +1,4 @@
-﻿@model VacationAccrual.Models.PayPeriodList
+﻿@model VacationAccrual.Models.PayPeriod
 
 @{
     ViewBag.Title = "Forecast";
@@ -11,7 +11,7 @@
 {
     <div style="text-align:center">
         <label style="font-size:18px">Pay period Startdate:</label>&nbsp;
-        <select name="StartDate" style="font-size:15px" asp-items="PayPeriodList.GetStartDateList()"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select name="StartDate" style="font-size:15px" asp-items="Global.GetStartDateList()"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <label style="font-size:18px">Accrual:</label>&nbsp;
         <input name="Accural" maxlength="4" style="width:55px; font-size:15px;" placeholder="(hours)" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <label style="font-size:18px">Balance:</label>&nbsp;
@@ -20,10 +20,8 @@
     </div>
     <br />
 
-    @if (Model != null && Model.PayPeriods != null) 
+    if (Model != null) 
     {
-        <input type="submit" name="Command" value="Refresh" style="margin:0px auto; display:block;" class="btn btn-primary" />
-        <br />
         <table style="width: auto; font-size:15px;" align="center" class="table table-bordered table-condensed table-hover">
             <thead> 
                 <tr>
@@ -35,8 +33,7 @@
             </thead>
             <tbody>
                 @{
-                    int i = 0;
-                    foreach (var item in Model.PayPeriods)
+                    foreach (var item in Model.PeriodList)
                     {
                         <tr>
                             <td>@item.Period</td>
@@ -44,7 +41,6 @@
                             <td><input name="Take" maxlength="4" style="width:40px; font-size:15px;" value="@item.Take" /></td>
                             <td>@item.Balance</td>
                         </tr>
-                        i++;
                     }
                 }
             </tbody>
