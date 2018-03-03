@@ -7,7 +7,7 @@ namespace VacationAccrual
 {
     public class Global
     {
-        public static List<SelectListItem> GetStartDateList()
+        public static List<SelectListItem> GetStartDateItems()
         {
             List<SelectListItem> startDateList = new List<SelectListItem>();
             DateTime startDate = DateTime.Now;
