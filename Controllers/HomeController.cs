@@ -9,17 +9,15 @@ namespace VacationAccrual.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            VacationAccrualViewModel vm = new VacationAccrualViewModel();
+            return View(vm);
         }
 
         [HttpPost]
-        public ActionResult Index(string StartDate, string Accural, string Balance)
+        public ActionResult Index(VacationAccrualViewModel vm)
         {
-            DateTime startDate = DateTime.Parse(StartDate);
-            Double accural = String.IsNullOrWhiteSpace(Accural) ? 0 : Double.Parse(Accural);
-            Double balance = String.IsNullOrWhiteSpace(Balance) ? 0 : Double.Parse(Balance);
-            
-            return View("Index", new PayPeriod(startDate, accural, balance));
+            vm.SetPeriodList(vm.SelectedStartDate, vm.SelectedPeriods, vm.Accural, vm.CurrentBalance);
+            return View("Index", vm);
         }
 
         public ActionResult Error()

@@ -2,3 +2,25 @@
     color: red;
     background-color: yellow;
 }
+.input-disabled {
+    background-color:#EBEBE4;
+    border:1px solid #ABADB3;
+}
+#SelectedStartDate {
+    font-size: 15px;
+}
+label {
+    font-size: 18px;
+}
+.text-box {
+    width: 55px; 
+    font-size: 15px;
+}
+#periodsTbl {
+    width: auto; 
+    font-size: 15px;
+}
+.take {
+    width: 40px;
+    font-size: 15px;
+}
