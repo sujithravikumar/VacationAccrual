@@ -8,19 +8,19 @@
 @using(Html.BeginForm())
 {
     <div style="text-align:center">
-        <label style="font-size:18px">Pay period Startdate:</label>&nbsp;
+        <label style="font-size:18px">Pay Period Startdate:</label>&nbsp;
         <select name="StartDate" style="font-size:15px" asp-items="Global.GetStartDateItems()"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <label style="font-size:18px">Accrual:</label>&nbsp;
         <input name="Accural" maxlength="4" style="width:55px; font-size:15px;" placeholder="(hours)" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <label style="font-size:18px">Balance:</label>&nbsp;
         <input name="Balance" maxlength="6" style="width:55px; font-size:15px;" placeholder="(hours)" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" name="Command" value="Submit" class="btn btn-primary" />
+        <input id="submitBtn" type="submit" name="Command" value="Submit" class="btn btn-primary" />
     </div>
     <br />
 
     if (Model != null) 
     {
-        <table id="tblOne" style="width: auto; font-size:15px;" align="center" class="table table-bordered table-condensed table-hover">
+        <table id="periodsTbl" style="width: auto; font-size: 15px;" align="center" class="table table-bordered table-condensed table-hover">
             <thead> 
                 <tr>
                     <th>Period</th>
@@ -35,9 +35,9 @@
                     {
                         <tr>
                             <td>@item.Period</td>
-                            <td>@item.Accural</td>
-                            <td><input id="Take" maxlength="4" style="width:40px; font-size:15px;" value="@item.Take" /></td>
-                            <td>@item.Balance</td>
+                            <td class="accural">@item.Accural</td>
+                            <td><input id="Take" maxlength="4" style="width:40px; font-size:15px;" class="take" value="@item.Take" /></td>
+                            <td class="balance">@item.Balance</td>
                         </tr>
                     }
                 }
