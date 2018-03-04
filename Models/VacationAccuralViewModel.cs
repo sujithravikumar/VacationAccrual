@@ -55,13 +55,13 @@ namespace VacationAccrual.Models
 
             if (biweeklyKey == 0)
             {
-                startDateList.Add(new SelectListItem { Text = weekBegin.ToString("MM-dd-yy") });
-                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-7).ToString("MM-dd-yy") });
+                startDateList.Add(new SelectListItem { Text = weekBegin.ToString("MM/dd/yy") });
+                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-7).ToString("MM/dd/yy") });
             }
             else
             {
-                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-7).ToString("MM-dd-yy") });
-                startDateList.Add(new SelectListItem { Text = weekBegin.ToString("MM-dd-yy") });
+                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-7).ToString("MM/dd/yy") });
+                startDateList.Add(new SelectListItem { Text = weekBegin.ToString("MM/dd/yy") });
             }
 
             this.StartDateList = startDateList;
@@ -76,7 +76,7 @@ namespace VacationAccrual.Models
 
             for (int i = 0; i < periods; i++)
             {
-                periodList.Add(new PayPeriod(startDate.ToString("MM-dd-yy") + " - " + startDate.AddDays(13).ToString("MM-dd-yy"), accural, 0, balance));
+                periodList.Add(new PayPeriod(startDate.ToString("MM/dd/yy") + " - " + startDate.AddDays(13).ToString("MM/dd/yy"), accural, 0, balance));
                 startDate = startDate.AddDays(14);
                 balance += accural;
             }

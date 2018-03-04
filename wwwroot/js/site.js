@@ -17,6 +17,10 @@ $(function () {
     });
 });
 
+$(document).ready(function() {
+    $('#periodsTbl').DataTable({searching: false, paging: false, ordering: false, info: false});
+});
+
 $(document).ready(function(){
     $("#periodsTbl tr").each(function (index) {
         if (index == 1) {

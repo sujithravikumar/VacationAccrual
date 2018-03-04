@@ -1,27 +1,32 @@
-.red-yellow {
+.red {
     color: red;
-    background-color: yellow;
 }
 .input-disabled {
     background-color:#EBEBE4;
     border:1px solid #ABADB3;
 }
 #SelectedStartDate,
-#SelectedPeriods {
-    font-size: 15px;
+#SelectedPeriods,
+#MaxBalance,
+#Accural,
+#Balance {
+    font-size: 16px;
 }
-label {
-    font-size: 18px;
+label,
+#submitBtn {
+    font-size: 16px;
+    font-weight: normal;
+    margin-left: 30px;
 }
 .textbox {
-    width: 45px; 
-    font-size: 15px;
+    width: 50px; 
+    font-size: 16px;
 }
 #periodsTbl {
     width: auto; 
-    font-size: 15px;
+    font-size: 16px;
 }
 .take {
     width: 40px;
-    font-size: 15px;
+    font-size: 16px;
 }

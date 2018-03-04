@@ -5,22 +5,22 @@
 {
     <div style="text-align:center">
         <label>Current Pay Period Startdate:</label>&nbsp;
-        @Html.DropDownListFor(m => m.SelectedStartDate, Model.StartDateList) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.DropDownListFor(m => m.SelectedStartDate, Model.StartDateList)
         <label>Max Balance Limit:</label>&nbsp;
-        @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox"}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox"})
         <label>Pay Periods:</label>&nbsp;
         @Html.DropDownListFor(m => m.SelectedPeriods, Model.Periods)
-        <br />
+        <br /><br />
         <label>Accrual:</label>&nbsp;
-        @Html.TextBoxFor(m => m.Accural, new { @maxlength = "4", @class = "textbox"})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.TextBoxFor(m => m.Accural, new { @maxlength = "4", @class = "textbox"})
         <label>Previous Pay Period Balance:</label>&nbsp;
-        @Html.TextBoxFor(m => m.Balance, new { @maxlength = "6", @class = "textbox"})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input id="submitBtn" type="submit" value="Submit" class="btn btn-primary" />
+        @Html.TextBoxFor(m => m.Balance, new { @maxlength = "6", @class = "textbox"})
+        <input id="submitBtn" type="submit" value="Submit" class="btn btn-default" />
     </div>
-    <br /><br />
+    <br />
     if (Model != null && Model.PeriodList !=null) 
     {
-        <table id="periodsTbl" align="center" class="table table-bordered table-condensed table-hover">
+        <table id="periodsTbl" align="center" class="table table-striped table-hover">
             <thead> 
                 <tr>
                     <th>Period</th>
@@ -50,7 +50,8 @@
         $(document).ready(function(){
             $("#periodsTbl td:nth-child(4)").each(function () {
                 if (parseInt($(this).text()) >= @Model.MaxBalance) {
-                    $(this).addClass('red-yellow');
+                    $(this).parent().addClass('danger');
+                    $(this).addClass('red');
                 }
             });
         });
@@ -80,10 +81,12 @@
                 });
                 $("#periodsTbl td:nth-child(4)").each(function () {
                     if (parseInt($(this).text()) >= @Model.MaxBalance) {
-                        $(this).addClass('red-yellow');
+                        $(this).parent().addClass('danger');
+                        $(this).addClass('red');
                     }
                     else {
-                        $(this).removeClass('red-yellow');
+                        $(this).parent().removeClass('danger');
+                        $(this).removeClass('red');
                     }
                 });
             });
