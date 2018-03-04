@@ -7,15 +7,15 @@
         <label>Current Pay Period Startdate:</label>&nbsp;
         @Html.DropDownListFor(m => m.SelectedStartDate, Model.StartDateList) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <label>Max Balance Limit:</label>&nbsp;
-        @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "text-box"}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox"}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <label>Pay Periods:</label>&nbsp;
         @Html.DropDownListFor(m => m.SelectedPeriods, Model.Periods)
         <br />
         <label>Accrual:</label>&nbsp;
-        @Html.TextBoxFor(m => m.Accural, new { @maxlength = "4", @class = "text-box"})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.TextBoxFor(m => m.Accural, new { @maxlength = "4", @class = "textbox"})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <label>Previous Pay Period Balance:</label>&nbsp;
-        @Html.TextBoxFor(m => m.CurrentBalance, new { @maxlength = "6", @class = "text-box"})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input id="submitBtn" type="submit" name="Command" value="Submit" class="btn btn-primary" />
+        @Html.TextBoxFor(m => m.Balance, new { @maxlength = "6", @class = "textbox"})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="submitBtn" type="submit" value="Submit" class="btn btn-primary" />
     </div>
     <br /><br />
     if (Model != null && Model.PeriodList !=null) 
@@ -57,22 +57,15 @@
     </script>
     <script>
         $(document).ready(function(){
-            $("#periodsTbl tr").each(function (index) {
-                if (index == 1) {
-                    $(this).find(".take").attr('readonly', true);
-                    $(this).find(".take").addClass('input-disabled');
-                }
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function(){
-            $("#periodsTbl input").change(function(){
+            $("#periodsTbl input").on('input', function(){
                 var accural;
                 var take;
                 var balance;
                 $("#periodsTbl tr").each(function (index) {
                     take = parseFloat($(this).find(".take").val());
+                    if(isNaN(take)) {
+                        take = 0;
+                    }
                     if(index > 0) {
                         if(index == 1) {
                             accural = parseFloat($(this).find(".accural").text());

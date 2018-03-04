@@ -19,7 +19,7 @@ namespace VacationAccrual.Models
         [Required]
         public float Accural { get; set; }
         [Required]
-        public float CurrentBalance { get; set; }
+        public float Balance { get; set; }
         public List<PayPeriod> PeriodList { get; set; }
 
         public VacationAccrualViewModel()

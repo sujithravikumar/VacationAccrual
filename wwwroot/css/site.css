@@ -6,14 +6,15 @@
     background-color:#EBEBE4;
     border:1px solid #ABADB3;
 }
-#SelectedStartDate {
+#SelectedStartDate,
+#SelectedPeriods {
     font-size: 15px;
 }
 label {
     font-size: 18px;
 }
-.text-box {
-    width: 55px; 
+.textbox {
+    width: 45px; 
     font-size: 15px;
 }
 #periodsTbl {

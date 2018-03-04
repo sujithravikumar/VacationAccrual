@@ -7,17 +7,13 @@ namespace VacationAccrual.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            VacationAccrualViewModel vm = new VacationAccrualViewModel();
-            return View(vm);
-        }
-
-        [HttpPost]
         public ActionResult Index(VacationAccrualViewModel vm)
         {
-            vm.SetPeriodList(vm.SelectedStartDate, vm.SelectedPeriods, vm.Accural, vm.CurrentBalance);
-            return View("Index", vm);
+            if(vm.SelectedStartDate != default(DateTime))
+            {
+                vm.SetPeriodList(vm.SelectedStartDate, vm.SelectedPeriods, vm.Accural, vm.Balance);
+            }
+            return View(vm);
         }
 
         public ActionResult Error()
