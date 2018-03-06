@@ -1,7 +1,7 @@
 ﻿@model VacationAccrual.Models.VacationAccrualViewModel
 <div style="text-align:center"><h3>Vacation Accrual Forecast Calculator</h3></div>
 <br />
-@using(Html.BeginForm())
+@using(Html.BeginForm("", "", FormMethod.Post, new { autocomplete="off" }))
 {
     <div style="text-align:center">
         <label>Current Pay Period Startdate:</label>&nbsp;
