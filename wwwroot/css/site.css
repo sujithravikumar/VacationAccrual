@@ -1,4 +1,7 @@
-.red {
+.takeHours {
+    background-color: greenyellow;
+}
+.forfeitWarn {
     color: red;
 }
 .input-disabled {
@@ -8,7 +11,7 @@
 #SelectedStartDate,
 #SelectedPeriods,
 #MaxBalance,
-#Accural,
+#Accrual,
 #Balance {
     font-size: 16px;
 }
@@ -23,12 +26,22 @@ label,
     font-size: 16px;
 }
 #periodsTbl {
-    width: 40%; 
+    width: 50%; 
     font-size: 16px;
 }
 .take {
     width: 40px;
     font-size: 16px;
+}
+#takeMsg {
+    display: block;
+    text-align: center;
+    line-height: 150%;
+    font-size: 16px;
+    font-style: italic;
+}
+#SelectedDaysOff {
+    background-color: greenyellow;
 }
 
 html,

@@ -3,7 +3,7 @@ $(function () {
         min: 0,
         max: 200
     });
-    $("#Accural").spinner({
+    $("#Accrual").spinner({
         min: 0,
         max: 20,
         step: 0.01,
