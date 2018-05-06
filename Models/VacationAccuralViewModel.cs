@@ -10,23 +10,28 @@ namespace VacationAccrual.Models
     {
         public List<SelectListItem> StartDateList { get; set; }
         [Required]
-        public DateTime SelectedStartDate { get; set; }
+        public string SelectedStartDate { get; set; }
         public List<SelectListItem> Periods { get; set; }
         [Required]
         public int SelectedPeriods { get; set; }
         [Required]
         public int MaxBalance { get; set; }
         [Required]
-        public float Accural { get; set; }
+        public float Accrual { get; set; }
         [Required]
         public float Balance { get; set; }
+        public List<SelectListItem> DaysOff { get; set; }
+        public int SelectedDaysOff { get; set; }
         public List<PayPeriod> PeriodList { get; set; }
 
         public VacationAccrualViewModel()
         {
             SetStartDateItems();
             SetPeriods();
+            SetDaysOff();
             this.MaxBalance = 120;
+            this.Accrual = 6;
+            this.Balance = 100;
         }
 
         public void SetPeriods() 
@@ -41,6 +46,16 @@ namespace VacationAccrual.Models
             this.SelectedPeriods = 8;
         }
 
+        public void SetDaysOff() 
+        {
+            List<SelectListItem> daysOff = new List<SelectListItem>();
+            daysOff.Add(new SelectListItem { Text = "0"});
+            daysOff.Add(new SelectListItem { Text = "1"});
+            daysOff.Add(new SelectListItem { Text = "2"});
+            this.DaysOff = daysOff;
+            this.SelectedDaysOff = 1;
+        }
+
         public void SetStartDateItems()
         {
             List<SelectListItem> startDateList = new List<SelectListItem>();
@@ -49,36 +64,46 @@ namespace VacationAccrual.Models
             int diff = DayOfWeek.Sunday - startDate.DayOfWeek;
             DateTime weekBegin = startDate.AddDays(diff);
 
+            for (int i=0; i<6; i++)
+            {
+                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-i*7).ToString("MM/dd/yy") });
+            }
+
+            this.StartDateList = startDateList;
+
             var calendar = new GregorianCalendar();
             var weekNumber = calendar.GetWeekOfYear(weekBegin, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
             int biweeklyKey = weekNumber % 2;
 
             if (biweeklyKey == 0)
             {
-                startDateList.Add(new SelectListItem { Text = weekBegin.ToString("MM/dd/yy") });
-                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-7).ToString("MM/dd/yy") });
+                this.SelectedStartDate = weekBegin.ToString("MM/dd/yy");
             }
             else
             {
-                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-7).ToString("MM/dd/yy") });
-                startDateList.Add(new SelectListItem { Text = weekBegin.ToString("MM/dd/yy") });
+                this.SelectedStartDate = weekBegin.AddDays(-7).ToString("MM/dd/yy");
             }
-
-            this.StartDateList = startDateList;
         }
 
-        public void SetPeriodList(DateTime startDate, int periods, float accural, float balance) 
+        public void SetPeriodList(string selectedStartDate, float maxBalance, int periods, float accrual, float balance) 
         { 
             List<PayPeriod> periodList = new List<PayPeriod>();
+            float take, forfeit = 0;
 
             //Calculate from previous pay period
-            startDate = startDate.AddDays(-14);
+            DateTime startDate = DateTime.Parse(selectedStartDate).AddDays(-14);
 
             for (int i = 0; i < periods; i++)
             {
-                periodList.Add(new PayPeriod(startDate.ToString("MM/dd/yy") + " - " + startDate.AddDays(13).ToString("MM/dd/yy"), accural, 0, balance));
+                take = 0;
+                if (balance > maxBalance)
+                {
+                    take = 8;
+                    balance -= take;
+                }
+                periodList.Add(new PayPeriod(startDate.ToString("MM/dd/yy") + " - " + startDate.AddDays(13).ToString("MM/dd/yy"), accrual, take, balance, forfeit));
                 startDate = startDate.AddDays(14);
-                balance += accural;
+                balance += accrual;
             }
             this.PeriodList = periodList;
         }
