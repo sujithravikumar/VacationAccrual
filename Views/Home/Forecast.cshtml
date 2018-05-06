@@ -6,7 +6,7 @@
         <div style="display: table-row;">
             <div style="display: table-cell;">
                 <label>Current Pay Period Startdate:</label>&nbsp;
-                @Html.DropDownListFor(m => m.SelectedStartDate, Model.StartDateList)
+                @Html.DropDownListFor(m => m.StartDate, Model.StartDateList)
             </div>
             <div style="display: table-cell;">
                 <label>Max Balance Limit:</label>&nbsp;
@@ -14,7 +14,7 @@
             </div>
             <div style="display: table-cell;">
                 <label>Pay Periods:</label>&nbsp;
-                @Html.DropDownListFor(m => m.SelectedPeriods, Model.Periods)
+                @Html.DropDownListFor(m => m.Period, Model.Periods)
             </div>
         </div>
     </div>

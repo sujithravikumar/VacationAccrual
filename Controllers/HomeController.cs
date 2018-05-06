@@ -9,15 +9,16 @@ namespace VacationAccrual.Controllers
     public class HomeController : Controller
     {
         private TelemetryClient telemetry = new TelemetryClient();
-        public ActionResult Forecast()
+        [HttpGet]
+        public ActionResult Forecast(VacationAccrualViewModel vm)
         {
-            VacationAccrualViewModel vm = new VacationAccrualViewModel();
             return View(vm);
         }
         [HttpPost]
-        public ActionResult Forecast(VacationAccrualViewModel vm)
+        [ActionName("Forecast")]
+        public ActionResult ForecastCalculate(VacationAccrualViewModel vm)
         {
-            vm.SetPeriodList(vm.SelectedStartDate, vm.MaxBalance, vm.SelectedPeriods, vm.Accrual, vm.Balance);
+            vm.SetPeriodList(vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
                 
             //Azure Application Insights
             telemetry.TrackEvent("Calculated Vacation Accrual");

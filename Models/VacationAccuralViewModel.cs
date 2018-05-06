@@ -10,10 +10,10 @@ namespace VacationAccrual.Models
     {
         public List<SelectListItem> StartDateList { get; set; }
         [Required]
-        public string SelectedStartDate { get; set; }
+        public string StartDate { get; set; }
         public List<SelectListItem> Periods { get; set; }
         [Required]
-        public int SelectedPeriods { get; set; }
+        public int Period { get; set; }
         [Required]
         public int MaxBalance { get; set; }
         [Required]
@@ -43,7 +43,7 @@ namespace VacationAccrual.Models
             periodsList.Add(new SelectListItem { Text = "16"});
             periodsList.Add(new SelectListItem { Text = "20"});
             this.Periods = periodsList;
-            this.SelectedPeriods = 8;
+            this.Period = 8;
         }
 
         public void SetDaysOff() 
@@ -77,11 +77,11 @@ namespace VacationAccrual.Models
 
             if (biweeklyKey == 0)
             {
-                this.SelectedStartDate = weekBegin.ToString("MM/dd/yy");
+                this.StartDate = weekBegin.ToString("MM/dd/yy");
             }
             else
             {
-                this.SelectedStartDate = weekBegin.AddDays(-7).ToString("MM/dd/yy");
+                this.StartDate = weekBegin.AddDays(-7).ToString("MM/dd/yy");
             }
         }
 

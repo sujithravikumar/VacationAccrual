@@ -8,8 +8,8 @@
     background-color:#EBEBE4;
     border:1px solid #ABADB3;
 }
-#SelectedStartDate,
-#SelectedPeriods,
+#StartDate,
+#Period,
 #MaxBalance,
 #Accrual,
 #Balance {

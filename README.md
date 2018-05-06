@@ -18,3 +18,13 @@ A calculator used for forecasting the vacation accrual for the pay periods.
 * Take (Unit: Hours) - Number of hours that you're planning to take off for a given pay period, for example: 8
 * Balance - Balance hours for a given pay period (capped at max balance limit)
 * Forefeit - Number of hours lost for a given pay period due to balance accrual exceeding the max limit
+
+## URL Arguments for Input Values
+
+Input | Argument | Example
+--- | --- | ---
+Current Pay Period Startdate | `StartDate` | StartDate=05%2F06%2F18
+Max Balance Limit | `MaxBalance` | MaxBalance=120
+Pay Periods | `Period` | Period=8
+Accrual | `Accrual` | Accrual=6
+Previous Pay Period Balance | `Balance` | Balance=100
