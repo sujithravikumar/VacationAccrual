@@ -2,20 +2,36 @@
 <div><h3>Vacation Accrual Forecast Calculator</h3></div>
 @using(Html.BeginForm("", "", FormMethod.Post, new { autocomplete="off" }))
 {
-    <div class="section">
-        <label>Current Pay Period Startdate:</label>&nbsp;
-        @Html.DropDownListFor(m => m.SelectedStartDate, Model.StartDateList)
-        <label>Max Balance Limit:</label>&nbsp;
-        @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox"})
-        <label>Pay Periods:</label>&nbsp;
-        @Html.DropDownListFor(m => m.SelectedPeriods, Model.Periods)
+    <div class="section" style="display: table; margin: 0 auto;">
+        <div style="display: table-row;">
+            <div style="display: table-cell;">
+                <label>Current Pay Period Startdate:</label>&nbsp;
+                @Html.DropDownListFor(m => m.SelectedStartDate, Model.StartDateList)
+            </div>
+            <div style="display: table-cell;">
+                <label>Max Balance Limit:</label>&nbsp;
+                @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox"})
+            </div>
+            <div style="display: table-cell;">
+                <label>Pay Periods:</label>&nbsp;
+                @Html.DropDownListFor(m => m.SelectedPeriods, Model.Periods)
+            </div>
+        </div>
     </div>
-    <div class="sub-section">
-        <label>Accrual:</label>&nbsp;
-        @Html.TextBoxFor(m => m.Accrual, new { @maxlength = "4", @class = "textbox"})
-        <label>Previous Pay Period Balance:</label>&nbsp;
-        @Html.TextBoxFor(m => m.Balance, new { @maxlength = "6", @class = "textbox"})
-        <input id="submitBtn" type="submit" value="Calculate" class="btn btn-default" />
+    <div class="sub-section" style="display: table; margin: 0 auto;">
+        <div style="display: table-row;">
+            <div style="display: table-cell;">
+                <label>Accrual:</label>&nbsp;
+                @Html.TextBoxFor(m => m.Accrual, new { @maxlength = "4", @class = "textbox"})
+            </div>
+            <div style="display: table-cell;">
+                <label>Previous Pay Period Balance:</label>&nbsp;
+                @Html.TextBoxFor(m => m.Balance, new { @maxlength = "6", @class = "textbox"})
+            </div>
+            <div style="display: table-cell;">
+                <input id="submitBtn" type="submit" value="Calculate" class="btn btn-default" />
+            </div>
+        </div>
     </div>
 }
 @if (Model != null && Model.PeriodList !=null) 
@@ -39,7 +55,7 @@
                         <tr>
                             <td>@item.Period</td>
                             <td class="accrual">@item.Accrual</td>
-                            <td>@Html.TextBoxFor(m => item.Take, new { @maxlength = "4", @class = "take" })</td>
+                            <td>@Html.TextBoxFor(m => item.Take, new { @maxlength = "3", @class = "take" })</td>
                             <td class="balance">@item.Balance</td>
                             <td class="forfeit">@item.Forfeit</td>
                         </tr>
