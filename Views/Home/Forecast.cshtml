@@ -5,15 +5,15 @@
     <div class="section" style="display: table; margin: 0 auto;">
         <div style="display: table-row;">
             <div style="display: table-cell;">
-                <label>Current Pay Period Startdate:</label>&nbsp;
+                <label>Start Date</label>&nbsp;
                 @Html.DropDownListFor(m => m.StartDate, Model.StartDateList)
             </div>
             <div style="display: table-cell;">
-                <label>Max Balance Limit:</label>&nbsp;
+                <label>Max Balance</label>&nbsp;
                 @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox"})
             </div>
             <div style="display: table-cell;">
-                <label>Pay Periods:</label>&nbsp;
+                <label>Period</label>&nbsp;
                 @Html.DropDownListFor(m => m.Period, Model.Periods)
             </div>
         </div>
@@ -21,11 +21,11 @@
     <div class="sub-section" style="display: table; margin: 0 auto;">
         <div style="display: table-row;">
             <div style="display: table-cell;">
-                <label>Accrual:</label>&nbsp;
+                <label>Accrual</label>&nbsp;
                 @Html.TextBoxFor(m => m.Accrual, new { @maxlength = "4", @class = "textbox"})
             </div>
             <div style="display: table-cell;">
-                <label>Previous Pay Period Balance:</label>&nbsp;
+                <label>Balance</label>&nbsp;
                 @Html.TextBoxFor(m => m.Balance, new { @maxlength = "6", @class = "textbox"})
             </div>
             <div style="display: table-cell;">
