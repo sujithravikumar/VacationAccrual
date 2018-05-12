@@ -20,8 +20,8 @@ namespace VacationAccrual.Models
         public float Accrual { get; set; }
         [Required]
         public float Balance { get; set; }
-        public List<SelectListItem> DaysOff { get; set; }
-        public int SelectedDaysOff { get; set; }
+        public List<SelectListItem> DaysOffList { get; set; }
+        public int DaysOff { get; set; }
         public List<PayPeriod> PeriodList { get; set; }
 
         public VacationAccrualViewModel()
@@ -48,12 +48,12 @@ namespace VacationAccrual.Models
 
         public void SetDaysOff() 
         {
-            List<SelectListItem> daysOff = new List<SelectListItem>();
-            daysOff.Add(new SelectListItem { Text = "0"});
-            daysOff.Add(new SelectListItem { Text = "1"});
-            daysOff.Add(new SelectListItem { Text = "2"});
-            this.DaysOff = daysOff;
-            this.SelectedDaysOff = 1;
+            List<SelectListItem> daysOffList = new List<SelectListItem>();
+            daysOffList.Add(new SelectListItem { Text = "0"});
+            daysOffList.Add(new SelectListItem { Text = "1"});
+            daysOffList.Add(new SelectListItem { Text = "2"});
+            this.DaysOffList = daysOffList;
+            this.DaysOff = 1;
         }
 
         public void SetStartDateItems()
@@ -98,8 +98,13 @@ namespace VacationAccrual.Models
                 take = 0;
                 if (balance > maxBalance)
                 {
-                    take = 8;
+                    take = (8 * this.DaysOff);
                     balance -= take;
+                    if (balance > maxBalance)
+                    {
+                        forfeit += balance - maxBalance;
+                        balance = maxBalance;
+                    }
                 }
                 periodList.Add(new PayPeriod(startDate.ToString("MM/dd/yy") + " - " + startDate.AddDays(13).ToString("MM/dd/yy"), accrual, take, balance, forfeit));
                 startDate = startDate.AddDays(14);
