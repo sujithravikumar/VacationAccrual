@@ -66,7 +66,7 @@ namespace VacationAccrual.Models
 
             for (int i=0; i<6; i++)
             {
-                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-i*7).ToString("MM/dd/yy") });
+                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-i*7).ToString("yyyy-MM-dd") });
             }
 
             this.StartDateList = startDateList;
@@ -77,11 +77,11 @@ namespace VacationAccrual.Models
 
             if (biweeklyKey == 0)
             {
-                this.StartDate = weekBegin.ToString("MM/dd/yy");
+                this.StartDate = weekBegin.ToString("yyyy-MM-dd");
             }
             else
             {
-                this.StartDate = weekBegin.AddDays(-7).ToString("MM/dd/yy");
+                this.StartDate = weekBegin.AddDays(-7).ToString("yyyy-MM-dd");
             }
         }
 
@@ -106,7 +106,7 @@ namespace VacationAccrual.Models
                         balance = maxBalance;
                     }
                 }
-                periodList.Add(new PayPeriod(startDate.ToString("MM/dd/yy") + " - " + startDate.AddDays(13).ToString("MM/dd/yy"), accrual, take, balance, forfeit));
+                periodList.Add(new PayPeriod(startDate.ToString("yyyy-MM-dd") + " - " + startDate.AddDays(13).ToString("yyyy-MM-dd"), accrual, take, balance, forfeit));
                 startDate = startDate.AddDays(14);
                 balance += accrual;
             }
