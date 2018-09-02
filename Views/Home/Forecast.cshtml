@@ -74,7 +74,7 @@
                 }
             });
             $("#periodsTbl td:nth-child(5)").each(function () {
-                if (parseInt($(this).text()) > 0) {
+                if (parseFloat($(this).text()) > 0) {
                     $(this).addClass('forfeitWarn');
                 }
             });
@@ -142,7 +142,7 @@
                 }
             });
             $("#periodsTbl td:nth-child(5)").each(function () {
-                if (parseInt($(this).text()) > 0) {
+                if (parseFloat($(this).text()) > 0) {
                     $(this).addClass('forfeitWarn');
                 }
                 else {
