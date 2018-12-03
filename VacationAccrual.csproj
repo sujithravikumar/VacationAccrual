@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <ApplicationInsightsResourceId>/subscriptions/16aa5a3e-7c87-47f9-a4df-f69a3bfa1e96/resourcegroups/VacationAccrual/providers/microsoft.insights/components/VacationAccrual</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/16aa5a3e-7c87-47f9-a4df-f69a3bfa1e96/resourcegroups/VacationAccrual/providers/microsoft.insights/components/VacationAccrual</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
