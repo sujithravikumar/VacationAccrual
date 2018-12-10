@@ -1,6 +1,6 @@
 using System;
 
-namespace VacationAccrual.Models
+namespace vacation_accrual_buddy.Models
 {
     public class ErrorViewModel
     {

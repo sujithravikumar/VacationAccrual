@@ -1,0 +1,135 @@
+﻿@model VacationAccrualViewModel
+@{
+    ViewData["Title"] = "Vacation Accrual Forecast";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Vacation Accrual Forecast</h1>
+</div>
+
+@using (Html.BeginForm("Submit", "Home", FormMethod.Post, new { autocomplete = "off" }))
+{
+    <div class="section text-center" style="display: table; margin: 0 auto;">
+        <div style="display: table-row;">
+            <div style="display: table-cell;">
+                <label>Start Date</label>&nbsp;
+                @Html.DropDownListFor(m => m.StartDate, Model.StartDateList)
+            </div>
+            <div style="display: table-cell;">
+                <label>Max Balance</label>&nbsp;
+                @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox" })
+            </div>
+            <div style="display: table-cell;">
+                <label>Period</label>&nbsp;
+                @Html.DropDownListFor(m => m.Period, Model.Periods)
+            </div>
+        </div>
+        <div class="sub-section"></div>
+        <div style="display: table-row;">
+            <div style="display: table-cell;">
+                <label>Accrual</label>&nbsp;
+                @Html.TextBoxFor(m => m.Accrual, new { @maxlength = "4", @class = "textbox" })
+            </div>
+            <div style="display: table-cell;">
+                <label>Balance</label>&nbsp;
+                @Html.TextBoxFor(m => m.Balance, new { @maxlength = "6", @class = "textbox" })
+            </div>
+            <div style="display: table-cell;">
+                <input id="submitBtn" type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model != null && Model.PeriodList != null)
+{
+    <div class="section">
+        <label id="takeMsg">Take @Html.DropDownListFor(m => m.DaysOff, Model.DaysOffList) day(s) off before it hits the max balance limit</label>
+        <table id="periodsTbl" align="center" class="table table-sm table-striped table-hover text-nowrap">
+            <thead>
+                <tr>
+                    <th>Period</th>
+                    <th>Accrual</th>
+                    <th>Take</th>
+                    <th>Balance</th>
+                    <th>Forfeit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in Model.PeriodList)
+                    {
+                        <tr>
+                            <td>@item.Period</td>
+                            <td class="accrual">@item.Accrual</td>
+                            <td>@Html.TextBoxFor(m => item.Take, new { @maxlength = "3", @class = "take" })</td>
+                            <td class="balance">@item.Balance</td>
+                            <td class="forfeit">@item.Forfeit</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function(){
+            $("#DaysOff").change(function(){
+                var daysOff = this.value;
+                var accrual, take, balance, forfeit = 0;
+                $("#periodsTbl tr").each(function (index) {
+                    take = 0;
+                    if(index > 0) {
+                        if(index == 1) {
+                            accrual = parseFloat($(this).find(".accrual").text());
+                            balance = parseFloat($(this).find(".balance").text());
+                        }
+                        else {
+                            balance = balance + accrual;
+                        }
+                        if(balance > @Model.MaxBalance){
+                            take = 8 * daysOff;
+                            balance -= take;
+                            if(balance > @Model.MaxBalance){
+                                forfeit += balance - @Model.MaxBalance;
+                                balance = @Model.MaxBalance;
+                            }
+                        }
+                        $(this).find(".take").val(take);
+                        $(this).find(".balance").text(balance.toFixed(2));
+                        $(this).find(".forfeit").text(forfeit.toFixed(2));
+                    }
+                });
+                formatTblCells();
+            });
+
+            $("#periodsTbl input").on('input', function(){
+                var accrual, take, balance, forfeit = 0;
+                $("#periodsTbl tr").each(function (index) {
+                    take = parseFloat($(this).find(".take").val());
+                    if(isNaN(take)) {
+                        take = 0;
+                    }
+                    if(index > 0) {
+                        if(index == 1) {
+                            accrual = parseFloat($(this).find(".accrual").text());
+                            balance = parseFloat($(this).find(".balance").text());
+                        }
+                        else {
+                            balance += accrual - take;
+                        }
+                        if(balance > @Model.MaxBalance){
+                            forfeit += balance - @Model.MaxBalance;
+                            balance = @Model.MaxBalance;
+                        }
+                        $(this).find(".balance").text(balance.toFixed(2));
+                        $(this).find(".forfeit").text(forfeit.toFixed(2));
+                    }
+                });
+                formatTblCells();
+            });
+        });
+    </script>
+}

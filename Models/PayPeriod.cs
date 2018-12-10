@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace VacationAccrual.Models
+﻿namespace vacation_accrual_buddy.Models
 {
     public class PayPeriod
     {

@@ -1,4 +1,4 @@
-$(function () {
+﻿$(function () {
     $("#MaxBalance").spinner({
         min: 0,
         max: 200
@@ -18,10 +18,15 @@ $(function () {
 });
 
 $(document).ready(function() {
-    $('#periodsTbl').DataTable({searching: false, paging: false, ordering: false, info: false});
+    $('#periodsTbl').DataTable({
+        searching: false,
+        paging: false,
+        ordering: false,
+        info: false
+    });
 });
 
-$(document).ready(function(){
+$(document).ready(function() {
     $("#periodsTbl tr").each(function (index) {
         if (index == 1) {
             $(this).find(".take").attr('readonly', true);
@@ -29,3 +34,36 @@ $(document).ready(function(){
         }
     });
 });
+
+$(document).ready(function() {
+    $("#periodsTbl td:nth-child(3)").each(function () {
+        if (parseFloat($(this).find(".take").val()) > 0) {
+            $(this).find(".take").addClass('takeHours');
+        }
+    });
+
+    $("#periodsTbl td:nth-child(5)").each(function () {
+        if (parseFloat($(this).text()) > 0) {
+            $(this).addClass('forfeitWarn');
+        }
+    });
+});
+
+function formatTblCells() {
+    $("#periodsTbl td:nth-child(3)").each(function () {
+        if (parseFloat($(this).find(".take").val()) > 0) {
+            $(this).find(".take").addClass('takeHours');
+        }
+        else {
+            $(this).find(".take").removeClass('takeHours');
+        }
+    });
+    $("#periodsTbl td:nth-child(5)").each(function () {
+        if (parseFloat($(this).text()) > 0) {
+            $(this).addClass('forfeitWarn');
+        }
+        else {
+            $(this).removeClass('forfeitWarn');
+        }
+    });
+}

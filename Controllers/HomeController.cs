@@ -1,32 +1,31 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using VacationAccrual.Models;
-using Microsoft.ApplicationInsights;
+using vacation_accrual_buddy.Models;
 
-namespace VacationAccrual.Controllers
+namespace vacation_accrual_buddy.Controllers
 {
     public class HomeController : Controller
     {
-        private TelemetryClient telemetry = new TelemetryClient();
         [HttpGet]
-        public ActionResult Forecast(VacationAccrualViewModel vm)
+        public IActionResult Index(VacationAccrualViewModel vm)
         {
             return View(vm);
         }
+
         [HttpPost]
-        [ActionName("Forecast")]
-        public ActionResult ForecastCalculate(VacationAccrualViewModel vm)
+        public IActionResult Submit(VacationAccrualViewModel vm)
         {
             vm.SetPeriodList(vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
-                
-            //Azure Application Insights
-            telemetry.TrackEvent("Calculated Vacation Accrual");
-
-            return View(vm);
+            return View("Index", vm);
         }
 
-        public ActionResult Error()
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

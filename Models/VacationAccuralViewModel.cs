@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace VacationAccrual.Models
+namespace vacation_accrual_buddy.Models
 {
     public class VacationAccrualViewModel
     {
@@ -34,24 +34,24 @@ namespace VacationAccrual.Models
             this.Balance = 100;
         }
 
-        public void SetPeriods() 
+        public void SetPeriods()
         {
             List<SelectListItem> periodsList = new List<SelectListItem>();
-            periodsList.Add(new SelectListItem { Text = "4"});
-            periodsList.Add(new SelectListItem { Text = "8"});
-            periodsList.Add(new SelectListItem { Text = "12"});
-            periodsList.Add(new SelectListItem { Text = "16"});
-            periodsList.Add(new SelectListItem { Text = "20"});
+            periodsList.Add(new SelectListItem { Text = "4" });
+            periodsList.Add(new SelectListItem { Text = "8" });
+            periodsList.Add(new SelectListItem { Text = "12" });
+            periodsList.Add(new SelectListItem { Text = "16" });
+            periodsList.Add(new SelectListItem { Text = "20" });
             this.Periods = periodsList;
             this.Period = 8;
         }
 
-        public void SetDaysOff() 
+        public void SetDaysOff()
         {
             List<SelectListItem> daysOffList = new List<SelectListItem>();
-            daysOffList.Add(new SelectListItem { Text = "0"});
-            daysOffList.Add(new SelectListItem { Text = "1"});
-            daysOffList.Add(new SelectListItem { Text = "2"});
+            daysOffList.Add(new SelectListItem { Text = "0" });
+            daysOffList.Add(new SelectListItem { Text = "1" });
+            daysOffList.Add(new SelectListItem { Text = "2" });
             this.DaysOffList = daysOffList;
             this.DaysOff = 1;
         }
@@ -64,9 +64,9 @@ namespace VacationAccrual.Models
             int diff = DayOfWeek.Sunday - startDate.DayOfWeek;
             DateTime weekBegin = startDate.AddDays(diff);
 
-            for (int i=0; i<6; i++)
+            for (int i = 0; i < 6; i++)
             {
-                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-i*7).ToString("yyyy-MM-dd") });
+                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-i * 7).ToString("yyyy-MM-dd") });
             }
 
             this.StartDateList = startDateList;
@@ -85,8 +85,8 @@ namespace VacationAccrual.Models
             }
         }
 
-        public void SetPeriodList(string selectedStartDate, float maxBalance, int periods, float accrual, float balance) 
-        { 
+        public void SetPeriodList(string selectedStartDate, float maxBalance, int periods, float accrual, float balance)
+        {
             List<PayPeriod> periodList = new List<PayPeriod>();
             float take, forfeit = 0;
 
