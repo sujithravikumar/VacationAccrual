@@ -73,11 +73,16 @@ body {
     font-size: 16px;
 }
 
-label,
+#inputsDiv {
+    display: table;
+    margin: 0 auto;
+}
+
+#inputsDiv label,
 #submitBtn {
     font-size: 16px;
     font-weight: normal;
-    margin-left: 20px;
+    margin-left: 15px;
 }
 
 .textbox {
@@ -117,9 +122,5 @@ label,
 }
 
 .section {
-    padding-top: 25px;
-}
-
-.sub-section {
-    padding-top: 5px;
+    padding-top: 20px;
 }

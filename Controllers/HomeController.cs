@@ -19,7 +19,7 @@ namespace vacation_accrual_buddy.Controllers
             return View("Index", vm);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Preferences()
         {
             return View();
         }
