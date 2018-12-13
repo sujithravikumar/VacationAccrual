@@ -39,7 +39,10 @@ namespace vacation_accrual_buddy
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration["CUSTOMCONNSTR_Database"]));
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<IdentityUser>(config =>
+                {
+                    config.SignIn.RequireConfirmedEmail = true;
+                })
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
