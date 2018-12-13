@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using vacation_accrual_buddy.Models;
 
@@ -19,6 +20,7 @@ namespace vacation_accrual_buddy.Controllers
             return View("Index", vm);
         }
 
+        [Authorize]
         public IActionResult Preferences()
         {
             return View();
