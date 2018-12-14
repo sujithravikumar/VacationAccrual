@@ -38,7 +38,7 @@ namespace vacation_accrual_buddy.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         [ViewData]
-        public string ConfirmationMessage { get; set; }
+        public bool DisplayConfirmationMessage { get; set; }
 
         public class InputModel
         {
@@ -85,8 +85,7 @@ namespace vacation_accrual_buddy.Areas.Identity.Pages.Account
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    ConfirmationMessage = "Please check your email and confirm your account, you must be confirmed "
-                                + "before you can log in.";
+                    DisplayConfirmationMessage = true;
 
                     return Page();
                 }

@@ -4,10 +4,12 @@
     ViewData["Title"] = "Register";
 }
 
-@if (ViewData["ConfirmationMessage"] != null)
+@if ((bool)ViewData["DisplayConfirmationMessage"] == true)
 {
-    <h1>Confirmation Email Sent</h1>
-    <h6>@ViewData["ConfirmationMessage"]</h6>
+    <h1>Confirmation email sent</h1>
+    <p>
+        Please check your email and confirm your account, you must be confirmed before you can log in.
+    </p>
 }
 else
 {
