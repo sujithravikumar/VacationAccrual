@@ -37,9 +37,6 @@ namespace vacation_accrual_buddy.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
-        [ViewData]
-        public bool DisplayConfirmationMessage { get; set; }
-
         public class InputModel
         {
             [Required]
@@ -90,12 +87,11 @@ namespace vacation_accrual_buddy.Areas.Identity.Pages.Account
                         If you received this message but did not attempt to register, 
                         you can safely disregard this email -- no further action is required.<br><br>
                         Thank you,<br>
-                        The Vacation Accrual Buddy Team"
+                        The Vacation Accrual Buddy Team<br><br>
+                        Never forfeit a vacation day!"
                     );
 
-                    DisplayConfirmationMessage = true;
-
-                    return Page();
+                    return RedirectToPage("./RegisterConfirmation");
                 }
                 foreach (var error in result.Errors)
                 {
