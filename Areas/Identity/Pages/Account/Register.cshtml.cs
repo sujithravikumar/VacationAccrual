@@ -82,18 +82,14 @@ namespace vacation_accrual_buddy.Areas.Identity.Pages.Account
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    // TODO: Implement try-catch and display success/error message appropriately
-                    // Since it's not a transaction it's best to retry sending email somehow
-                    // or give an interface for user to be able to resend confirmation email
-
                     await _emailSender.SendEmailAsync(
                         Input.Email,
                         "Thanks for Using Vacation Accrual Buddy! Please Confirm Your Email",
                         $@"Hello {Input.Email}!<br><br>
-                        Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.<br><br>
+                        Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' target='_blank'>clicking here</a>.<br><br>
                         If you received this message but did not attempt to register, 
                         you can safely disregard this email -- no further action is required.<br><br>
-                        Thank you,<br><br>
+                        Thank you,<br>
                         The Vacation Accrual Buddy Team"
                     );
 
