@@ -50,6 +50,7 @@ namespace vacation_accrual_buddy.Models
         {
             List<SelectListItem> daysOffList = new List<SelectListItem>();
             daysOffList.Add(new SelectListItem { Text = "0" });
+            daysOffList.Add(new SelectListItem { Text = "0.5" });
             daysOffList.Add(new SelectListItem { Text = "1" });
             daysOffList.Add(new SelectListItem { Text = "2" });
             this.DaysOffList = daysOffList;
@@ -64,7 +65,7 @@ namespace vacation_accrual_buddy.Models
             int diff = DayOfWeek.Sunday - startDate.DayOfWeek;
             DateTime weekBegin = startDate.AddDays(diff);
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 1; i >= 0; i--)
             {
                 startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-i * 7).ToString("yyyy-MM-dd") });
             }
