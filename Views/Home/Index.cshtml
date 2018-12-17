@@ -1,10 +1,16 @@
-﻿@model VacationAccrualViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model VacationAccrualViewModel
 @{
     ViewData["Title"] = "Home";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Vacation Accrual Forecast</h1>
+    <h1 class="display-4" style="display:inline-block; vertical-align:middle">Vacation Accrual Forecast</h1>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <button type="submit" class="btn btn-success" style="display:inline-block; margin-left:0.5em">Save</button>
+    }
 </div>
 
 @using (Html.BeginForm("Submit", "Home", FormMethod.Post, new { autocomplete = "off" }))
