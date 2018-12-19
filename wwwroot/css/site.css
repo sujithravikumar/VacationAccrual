@@ -78,11 +78,14 @@ body {
     margin: 0 auto;
 }
 
+#inputsDiv div div {
+    padding: 0 5px;
+}
+
 #inputsDiv label,
 #submitBtn {
     font-size: 16px;
     font-weight: normal;
-    margin-left: 15px;
 }
 
 .textbox {

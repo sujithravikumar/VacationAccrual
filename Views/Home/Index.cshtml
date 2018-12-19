@@ -15,7 +15,7 @@
 
 @using (Html.BeginForm("", "", FormMethod.Post, new { autocomplete = "off" }))
 {
-    <div id="inputsDiv" class="section">
+    <div id="inputsDiv" class="section text-center">
         <div style="display: table-row;">
             <div style="display: table-cell;">
                 <label>Start Date</label>
@@ -26,16 +26,16 @@
                 @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox" })
             </div>
             <div style="display: table-cell;">
-                <label>Period</label>
-                @Html.DropDownListFor(m => m.Period, Model.Periods)
-            </div>
-            <div style="display: table-cell;">
                 <label>Accrual</label>
                 @Html.TextBoxFor(m => m.Accrual, new { @maxlength = "4", @class = "textbox" })
             </div>
             <div style="display: table-cell;">
                 <label>Balance</label>
                 @Html.TextBoxFor(m => m.Balance, new { @maxlength = "6", @class = "textbox" })
+            </div>
+            <div style="display: table-cell;">
+                <label>Period</label>
+                @Html.DropDownListFor(m => m.Period, Model.Periods)
             </div>
             <div style="display: table-cell;">
                 <input id="submitBtn" type="submit" value="Submit" class="btn btn-primary" />
