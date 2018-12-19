@@ -14,6 +14,7 @@ namespace vacation_accrual_buddy.Controllers
         }
 
         [HttpPost]
+        [ActionName("Index")]
         public IActionResult Submit(VacationAccrualViewModel vm)
         {
             vm.SetPeriodList(vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
