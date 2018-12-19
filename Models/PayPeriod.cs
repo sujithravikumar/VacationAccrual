@@ -8,6 +8,8 @@
         public string Balance { get; set; }
         public string Forfeit { get; set; }
 
+        public PayPeriod() { }
+
         public PayPeriod(string period, float accrual, float take, float balance, float forfeit)
         {
             this.Period = period;
