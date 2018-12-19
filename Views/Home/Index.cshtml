@@ -60,15 +60,17 @@
             </thead>
             <tbody>
                 @{
+                    int i = 0;
                     foreach (var item in Model.PeriodList)
                     {
                         <tr>
                             <td>@item.Period</td>
                             <td class="accrual">@item.Accrual</td>
-                            <td>@Html.TextBoxFor(m => item.Take, new { @maxlength = "3", @class = "take" })</td>
+                            <td>@Html.TextBoxFor(m => m.PeriodList[i].Take, new { @id = "Take_" + i, @maxlength = "3", @class = "take" })</td>
                             <td class="balance">@item.Balance</td>
                             <td class="forfeit">@item.Forfeit</td>
                         </tr>
+                        i++;
                     }
                 }
             </tbody>
