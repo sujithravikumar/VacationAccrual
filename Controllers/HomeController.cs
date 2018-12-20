@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using vacation_accrual_buddy.Models;
+using vacation_accrual_buddy.Repositories;
 
 namespace vacation_accrual_buddy.Controllers
 {
@@ -10,13 +11,16 @@ namespace vacation_accrual_buddy.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IUserPreferencesRepository _userPreferencesRepository;
 
         public HomeController(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            IUserPreferencesRepository userPreferencesRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _userPreferencesRepository = userPreferencesRepository;
         }
 
         [HttpGet]
@@ -54,7 +58,8 @@ namespace vacation_accrual_buddy.Controllers
         [HttpPost]
         public IActionResult SavePreferences(VacationAccrualViewModel vm)
         {
-            return Content("Success");
+            bool result = _userPreferencesRepository.UserPreferencesRecordExist();
+            return Content(result.ToString());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

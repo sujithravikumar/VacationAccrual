@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using vacation_accrual_buddy.Data;
+using vacation_accrual_buddy.Repositories;
 
 namespace vacation_accrual_buddy
 {
@@ -51,6 +52,8 @@ namespace vacation_accrual_buddy
 
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
+
+            services.AddTransient<IUserPreferencesRepository, UserPreferencesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
