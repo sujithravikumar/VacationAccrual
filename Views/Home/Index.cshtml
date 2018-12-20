@@ -24,12 +24,12 @@
                     @Html.DropDownListFor(m => m.StartDate, Model.StartDateList)
                 </div>
                 <div style="display: table-cell;">
-                    <label>Max Balance</label>
-                    @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox" })
-                </div>
-                <div style="display: table-cell;">
                     <label>Accrual</label>
                     @Html.TextBoxFor(m => m.Accrual, new { @maxlength = "4", @class = "textbox" })
+                </div>
+                <div style="display: table-cell;">
+                    <label>Max Balance</label>
+                    @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox" })
                 </div>
                 <div style="display: table-cell;">
                     <label>Balance</label>
