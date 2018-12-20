@@ -73,19 +73,8 @@ body {
     font-size: 16px;
 }
 
-#inputsDiv {
-    display: table;
-    margin: 0 auto;
-}
-
-#inputsDiv div div {
-    padding: 0 5px;
-}
-
-#inputsDiv label,
 #submitBtn {
-    font-size: 16px;
-    font-weight: normal;
+    margin-top: -8px
 }
 
 .textbox {
