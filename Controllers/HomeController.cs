@@ -41,6 +41,7 @@ namespace vacation_accrual_buddy.Controllers
             return View("Index", vm);
         }
 
+        [HttpGet]
         [Authorize]
         public IActionResult Preferences(VacationAccrualViewModel vm)
         {
@@ -48,6 +49,12 @@ namespace vacation_accrual_buddy.Controllers
             // fetch preferences values
 
             return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult SavePreferences(VacationAccrualViewModel vm)
+        {
+            return Content("Success");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

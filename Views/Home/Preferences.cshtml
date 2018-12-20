@@ -14,7 +14,6 @@
             <small class="form-text text-muted">
                 Start date of the current pay period.
             </small>
-            <span class="text-danger"></span>
         </div>
         <div class="form-group">
             <label>Accrual</label>
@@ -22,7 +21,6 @@
             <small class="form-text text-muted">
                 Accrual hours per pay period.
             </small>
-            <span class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-4">
@@ -32,7 +30,6 @@
             <small class="form-text text-muted">
                 Maximum balance hours limit.
             </small>
-            <span class="text-danger"></span>
         </div>
         <div class="form-group">
             <label>Balance</label>
@@ -40,7 +37,6 @@
             <small class="form-text text-muted">
                 Balance hours of previous pay period.
             </small>
-            <span class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-4">
@@ -50,14 +46,38 @@
             <small class="form-text text-muted">
                 Number of future pay periods to be forecasted.
             </small>
-            <span class="text-danger"></span>
         </div>
     </div>
 </div>
 
 <div style="padding-top:1em">
-    <button type="submit" class="btn btn-success">Save</button>
+    <button id="saveBtn" type="submit" class="btn btn-success">Save</button>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $("#saveBtn").click(function() {
+                var VacationAccrualViewModel = {
+                    StartDate: $("#StartDate").val(),
+                    Accrual: $("#Accrual").val(),
+                    MaxBalance: $("#MaxBalance").val(),
+                    Balance: $("#Balance").val(),
+                    Period: $("#Period").val()
+                };
+
+                $.ajax({
+                    url: '@Url.Action("SavePreferences", "Home")',
+                    type: 'POST',
+                    data: VacationAccrualViewModel,
+                    success: function(response) {
+
+                    }
+                });
+            });
+        });
+    </script>
+}
 
 @*
     <div class="row">
