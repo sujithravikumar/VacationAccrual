@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using vacation_accrual_buddy.Models;
 
@@ -7,9 +8,28 @@ namespace vacation_accrual_buddy.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public HomeController(
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
+
         [HttpGet]
         public IActionResult Index(VacationAccrualViewModel vm)
         {
+            if (_signInManager.IsSignedIn(User))
+            {
+                // TODO if user preferences record exists, then
+                // fetch preferences values and redirect to Submit
+
+                // else
+                return RedirectToAction("Preferences");
+            }
             return View(vm);
         }
 
@@ -22,9 +42,12 @@ namespace vacation_accrual_buddy.Controllers
         }
 
         [Authorize]
-        public IActionResult Preferences()
+        public IActionResult Preferences(VacationAccrualViewModel vm)
         {
-            return View();
+            // TODO if user preferences record exists, then
+            // fetch preferences values
+
+            return View(vm);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
