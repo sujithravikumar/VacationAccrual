@@ -22,13 +22,15 @@ namespace vacation_accrual_buddy.Repositories
             }
         }
 
-        public bool UserPreferencesRecordExist()
+        public bool Exists(string userId)
         {
             using (IDbConnection conn = Connection)
             {
-                string query = "SELECT 555";
-                var result = conn.Query(query);
-                return result != null;
+                string query = @"SELECT exists
+                                  (SELECT 1
+                                   FROM public.user_data
+                                   WHERE user_id = @userId)";
+                return conn.ExecuteScalar<bool>(query, new { userId });
             }
         }
     }

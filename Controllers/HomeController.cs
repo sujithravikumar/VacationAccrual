@@ -58,7 +58,8 @@ namespace vacation_accrual_buddy.Controllers
         [HttpPost]
         public IActionResult SavePreferences(VacationAccrualViewModel vm)
         {
-            bool result = _userPreferencesRepository.UserPreferencesRecordExist();
+            string userId = _userManager.GetUserId(User);
+            bool result = _userPreferencesRepository.Exists(userId);
             return Content(result.ToString());
         }
 
