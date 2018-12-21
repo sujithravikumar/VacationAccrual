@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -59,8 +61,30 @@ namespace vacation_accrual_buddy.Controllers
         public IActionResult SavePreferences(VacationAccrualViewModel vm)
         {
             string userId = _userManager.GetUserId(User);
-            bool result = _userRepository.Exists(userId);
-            return Content(result.ToString());
+            if(!_userRepository.Exists(userId))
+            {
+                _userRepository.Insert(
+                    userId,
+                    StartDateEvenWW(vm.StartDate),
+                    vm.Accrual,
+                    vm.MaxBalance,
+                    vm.Period
+                );
+            }
+            else
+            {
+                // TODO Update the record
+            }
+            return Content("Done.");
+        }
+
+        private bool StartDateEvenWW(string StartDate)
+        {
+            GregorianCalendar calendar = new GregorianCalendar();
+            int weekNumber = calendar.GetWeekOfYear(
+                DateTime.ParseExact(StartDate, "yyyy-MM-dd", null),
+                CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
+            return weekNumber % 2 == 0;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
