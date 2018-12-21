@@ -26,11 +26,44 @@ namespace vacation_accrual_buddy.Repositories
         {
             using (IDbConnection conn = Connection)
             {
-                string query = @"SELECT exists
-                                  (SELECT 1
-                                   FROM public.user_data
-                                   WHERE user_id = @userId)";
+                string query = @"SELECT EXISTS (SELECT 1 
+                                               FROM   PUBLIC.user_data 
+                                               WHERE  user_id = @userId) ";
                 return conn.ExecuteScalar<bool>(query, new { userId });
+            }
+        }
+
+        public void Insert(
+            string userId,
+            bool startDateEvenWW,
+            decimal accrual,
+            decimal maxBalance,
+            int period)
+        {
+            using (IDbConnection conn = Connection)
+            {
+                string query = @"INSERT INTO PUBLIC.user_data 
+                                            (user_id, 
+                                             start_date_even_ww, 
+                                             accrual, 
+                                             max_balance, 
+                                             period) 
+                                VALUES      (@userId, 
+                                             @cycleStartEvenWW, 
+                                             @accrual, 
+                                             @maxBalance, 
+                                             @period) ";
+                int affectedRows = conn.Execute(
+                                        query,
+                                        new
+                                        {
+                                            userId,
+                                            startDateEvenWW,
+                                            accrual,
+                                            maxBalance,
+                                            period        
+                                        });
+
             }
         }
     }
