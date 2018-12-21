@@ -3,14 +3,14 @@
     public class PayPeriod
     {
         public string Period { get; set; }
-        public float Accrual { get; set; }
-        public float Take { get; set; }
+        public decimal Accrual { get; set; }
+        public decimal Take { get; set; }
         public string Balance { get; set; }
         public string Forfeit { get; set; }
 
         public PayPeriod() { }
 
-        public PayPeriod(string period, float accrual, float take, float balance, float forfeit)
+        public PayPeriod(string period, decimal accrual, decimal take, decimal balance, decimal forfeit)
         {
             this.Period = period;
             this.Accrual = accrual;

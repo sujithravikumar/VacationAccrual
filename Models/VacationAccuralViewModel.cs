@@ -17,9 +17,9 @@ namespace vacation_accrual_buddy.Models
         [Required]
         public int MaxBalance { get; set; }
         [Required]
-        public float Accrual { get; set; }
+        public decimal Accrual { get; set; }
         [Required]
-        public float Balance { get; set; }
+        public decimal Balance { get; set; }
         public List<SelectListItem> DaysOffList { get; set; }
         public int DaysOff { get; set; }
         public List<PayPeriod> PeriodList { get; set; }
@@ -86,10 +86,10 @@ namespace vacation_accrual_buddy.Models
             }
         }
 
-        public void SetPeriodList(string selectedStartDate, float maxBalance, int periods, float accrual, float balance)
+        public void SetPeriodList(string selectedStartDate, int maxBalance, int periods, decimal accrual, decimal balance)
         {
             List<PayPeriod> periodList = new List<PayPeriod>();
-            float take, forfeit = 0;
+            decimal take, forfeit = 0;
 
             //Calculate from previous pay period
             DateTime startDate = DateTime.Parse(selectedStartDate).AddDays(-14);
