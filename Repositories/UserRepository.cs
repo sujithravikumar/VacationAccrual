@@ -5,11 +5,11 @@ using Npgsql;
 
 namespace vacation_accrual_buddy.Repositories
 {
-    public class UserPreferencesRepository : IUserPreferencesRepository
+    public class UserRepository : IUserRepository
     {
         private readonly IConfiguration _configuration;
 
-        public UserPreferencesRepository(IConfiguration configuration)
+        public UserRepository(IConfiguration configuration)
         {
             _configuration = configuration;
         }

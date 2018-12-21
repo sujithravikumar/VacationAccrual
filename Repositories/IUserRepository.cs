@@ -1,7 +1,7 @@
 ﻿using System;
 namespace vacation_accrual_buddy.Repositories
 {
-    public interface IUserPreferencesRepository
+    public interface IUserRepository
     {
         bool Exists(string userId);
     }

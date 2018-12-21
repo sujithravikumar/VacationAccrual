@@ -11,16 +11,16 @@ namespace vacation_accrual_buddy.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly IUserPreferencesRepository _userPreferencesRepository;
+        private readonly IUserRepository _userRepository;
 
         public HomeController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IUserPreferencesRepository userPreferencesRepository)
+            IUserRepository userRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _userPreferencesRepository = userPreferencesRepository;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
@@ -59,7 +59,7 @@ namespace vacation_accrual_buddy.Controllers
         public IActionResult SavePreferences(VacationAccrualViewModel vm)
         {
             string userId = _userManager.GetUserId(User);
-            bool result = _userPreferencesRepository.Exists(userId);
+            bool result = _userRepository.Exists(userId);
             return Content(result.ToString());
         }
 
