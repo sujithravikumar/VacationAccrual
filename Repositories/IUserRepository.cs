@@ -1,9 +1,11 @@
-﻿using System;
+﻿using vacation_accrual_buddy.Models;
 namespace vacation_accrual_buddy.Repositories
 {
     public interface IUserRepository
     {
         bool Exists(string userId);
+
+        UserDataModel Get(string userId);
 
         void Insert(
             string userId,

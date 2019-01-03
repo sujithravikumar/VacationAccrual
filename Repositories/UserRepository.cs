@@ -2,6 +2,7 @@
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
+using vacation_accrual_buddy.Models;
 
 namespace vacation_accrual_buddy.Repositories
 {
@@ -30,6 +31,18 @@ namespace vacation_accrual_buddy.Repositories
                                                FROM   PUBLIC.user_data 
                                                WHERE  user_id = @userId)";
                 return conn.ExecuteScalar<bool>(query, new { userId });
+            }
+        }
+
+        public UserDataModel Get(string userId)
+        {
+            using (IDbConnection conn = Connection)
+            {
+                string query = @"SELECT *
+                                FROM PUBLIC.user_data
+                                WHERE user_id = @userId";
+                var result = conn.QuerySingle<UserDataModel>(query, new { userId });
+                return result;
             }
         }
 
