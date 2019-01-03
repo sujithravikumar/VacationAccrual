@@ -41,8 +41,7 @@ namespace vacation_accrual_buddy.Repositories
                 string query = @"SELECT *
                                 FROM PUBLIC.user_data
                                 WHERE user_id = @userId";
-                var result = conn.QuerySingle<UserDataModel>(query, new { userId });
-                return result;
+                return conn.QuerySingle<UserDataModel>(query, new { userId });
             }
         }
 
