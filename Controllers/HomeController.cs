@@ -32,9 +32,15 @@ namespace vacation_accrual_buddy.Controllers
             {
                 // TODO if user preferences record exists, then
                 // fetch preferences values and redirect to Submit
+                string userId = _userManager.GetUserId(User);
+                if (_userRepository.Exists(userId))
+                {
 
-                // else
-                return RedirectToAction("Preferences");
+                }
+                else
+                {
+                    return RedirectToAction("Preferences");
+                }
             }
             return View(vm);
         }
@@ -115,10 +121,7 @@ namespace vacation_accrual_buddy.Controllers
                 {
                     return weekBegin.ToString("yyyy-MM-dd");
                 }
-                else
-                {
-                    return weekBegin.AddDays(-7).ToString("yyyy-MM-dd");
-                }
+                return weekBegin.AddDays(-7).ToString("yyyy-MM-dd");
             }
             else
             {
@@ -126,10 +129,7 @@ namespace vacation_accrual_buddy.Controllers
                 {
                     return weekBegin.AddDays(-7).ToString("yyyy-MM-dd");
                 }
-                else
-                {
-                    return weekBegin.ToString("yyyy-MM-dd");
-                }
+                return weekBegin.ToString("yyyy-MM-dd");
             }
         }
 
