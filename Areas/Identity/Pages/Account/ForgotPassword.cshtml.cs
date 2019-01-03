@@ -59,10 +59,7 @@ namespace vacation_accrual_buddy.Areas.Identity.Pages.Account
                     $@"You are receiving this message because you have requested to reset your password.<br><br>
                     Please <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' target='_blank'>click here</a> to set a new password.<br><br>
                     If you did not request a password change or you have any additional questions, 
-                    please contact Vacation Accrual Buddy at <a href='mailto:vacation.accrual.buddy@gmail.com' target='_blank'>vacation.accrual.buddy@gmail.com</a>.<br><br>
-                    Thank you,<br>
-                    The Vacation Accrual Buddy Team<br><br>
-                    Never forfeit a vacation day!"
+                    please contact Vacation Accrual Buddy at <a href='mailto:vacation.accrual.buddy@gmail.com' target='_blank'>vacation.accrual.buddy@gmail.com</a>."
                 );
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
