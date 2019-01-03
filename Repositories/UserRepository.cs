@@ -28,7 +28,7 @@ namespace vacation_accrual_buddy.Repositories
             {
                 string query = @"SELECT EXISTS (SELECT 1 
                                                FROM   PUBLIC.user_data 
-                                               WHERE  user_id = @userId) ";
+                                               WHERE  user_id = @userId)";
                 return conn.ExecuteScalar<bool>(query, new { userId });
             }
         }
@@ -52,7 +52,7 @@ namespace vacation_accrual_buddy.Repositories
                                              @startDateEvenWW, 
                                              @accrual, 
                                              @maxBalance, 
-                                             @period) ";
+                                             @period)";
                 int affectedRows = conn.Execute(
                                         query,
                                         new
@@ -63,7 +63,34 @@ namespace vacation_accrual_buddy.Repositories
                                             maxBalance,
                                             period        
                                         });
+            }
+        }
 
+        public void Update(
+            string userId,
+            bool startDateEvenWW,
+            decimal accrual,
+            decimal maxBalance,
+            int period)
+        {
+            using (IDbConnection conn = Connection)
+            {
+                string query = @"UPDATE public.user_data
+                                SET start_date_even_ww = @startDateEvenWW,
+                                    accrual = @accrual,
+                                    max_balance = @maxBalance,
+                                    period = @period
+                                WHERE user_id = @userId";
+                int affectedRows = conn.Execute(
+                                        query,
+                                        new
+                                        {
+                                            userId,
+                                            startDateEvenWW,
+                                            accrual,
+                                            maxBalance,
+                                            period
+                                        });
             }
         }
     }
