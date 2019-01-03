@@ -30,17 +30,19 @@ namespace vacation_accrual_buddy.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
-                // TODO if user preferences record exists, then
-                // fetch preferences values and redirect to Submit
                 string userId = _userManager.GetUserId(User);
                 if (_userRepository.Exists(userId))
                 {
+                    UserDataModel userData = _userRepository.Get(userId);
+                    vm.StartDate = DecodeStartDateEvenWW(userData.Start_Date_Even_Ww);
+                    vm.Accrual = userData.Accrual;
+                    vm.MaxBalance = userData.Max_Balance;
+                    vm.Period = userData.Period;
 
+                    vm.SetPeriodList(vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
+                    return View(vm);
                 }
-                else
-                {
-                    return RedirectToAction("Preferences");
-                }
+                return RedirectToAction("Preferences");
             }
             return View(vm);
         }
