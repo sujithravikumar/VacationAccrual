@@ -49,7 +49,7 @@ namespace vacation_accrual_buddy.Repositories
                                              max_balance, 
                                              period) 
                                 VALUES      (@userId, 
-                                             @cycleStartEvenWW, 
+                                             @startDateEvenWW, 
                                              @accrual, 
                                              @maxBalance, 
                                              @period) ";
