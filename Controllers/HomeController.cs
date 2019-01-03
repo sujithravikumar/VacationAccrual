@@ -73,7 +73,13 @@ namespace vacation_accrual_buddy.Controllers
             }
             else
             {
-                // TODO Update the record
+                _userRepository.Update(
+                    userId,
+                    StartDateEvenWW(vm.StartDate),
+                    vm.Accrual,
+                    vm.MaxBalance,
+                    vm.Period
+                );
             }
             return Content("Done.");
         }
