@@ -54,6 +54,7 @@ namespace vacation_accrual_buddy
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IVacationRepository, VacationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
