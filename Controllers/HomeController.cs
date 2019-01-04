@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
@@ -41,7 +42,7 @@ namespace vacation_accrual_buddy.Controllers
 
                     // TODO retrieve _vacationRepository data
 
-                    vm.SetPeriodList(vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
+                    vm.SetPeriodList(new List<PayPeriod>(), vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
                     return View(vm);
                 }
                 return RedirectToAction("Preferences");
@@ -53,7 +54,7 @@ namespace vacation_accrual_buddy.Controllers
         [ActionName("Index")]
         public IActionResult Submit(VacationAccrualViewModel vm)
         {
-            vm.SetPeriodList(vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
+            vm.SetPeriodList(new List<PayPeriod>(), vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
             return View("Index", vm);
         }
 
@@ -86,8 +87,6 @@ namespace vacation_accrual_buddy.Controllers
                     vm.MaxBalance,
                     vm.Period
                 );
-
-                // TODO _vacationRepository insert
             }
             else
             {
