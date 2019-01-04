@@ -24,6 +24,28 @@ namespace vacation_accrual_buddy.Repositories
             }
         }
 
+        public bool Exists(
+            string userId,
+            DateTime startDate,
+            DateTime endDate)
+        {
+            using (IDbConnection conn = Connection)
+            {
+                string query = @"SELECT EXISTS (SELECT 1
+                               FROM   PUBLIC.user_data
+                               WHERE  user_id = @userId
+                                      AND start_date = TO_DATE(@startDate, 'YYYY-MM-DD')
+                                      AND end_date = TO_DATE(@endDate, 'YYYY-MM-DD'))";
+                return conn.ExecuteScalar<bool>(
+                                    query,
+                                    new {
+                                        userId,
+                                        startDate = startDate.ToString("yyyy-MM-dd"),
+                                        endDate = endDate.ToString("yyyy-MM-dd")
+                                    });
+            }
+        }
+
         public VacationDataModel Get(
             string userId,
             DateTime startDate,

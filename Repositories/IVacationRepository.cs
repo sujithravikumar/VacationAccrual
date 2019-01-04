@@ -4,6 +4,11 @@ namespace vacation_accrual_buddy.Repositories
 {
     public interface IVacationRepository
     {
+        bool Exists(
+            string userId,
+            DateTime startDate,
+            DateTime endDate);
+
         VacationDataModel Get(
             string userId,
             DateTime startDate,
