@@ -39,6 +39,9 @@ namespace vacation_accrual_buddy.Controllers
                     vm.MaxBalance = userData.Max_Balance;
                     vm.Period = userData.Period;
 
+                    // TODO if _vacationRepository exists then retrieve the data
+                    // else do nothing
+
                     vm.SetPeriodList(vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
                     return View(vm);
                 }
@@ -84,6 +87,8 @@ namespace vacation_accrual_buddy.Controllers
                     vm.MaxBalance,
                     vm.Period
                 );
+
+                // TODO _vacationRepository insert
             }
             else
             {
