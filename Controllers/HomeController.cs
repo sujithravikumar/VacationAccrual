@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,15 +16,18 @@ namespace vacation_accrual_buddy.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserRepository _userRepository;
+        private readonly IVacationRepository _vacationRepository;
 
         public HomeController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            IVacationRepository vacationRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _userRepository = userRepository;
+            _vacationRepository = vacationRepository;
         }
 
         [HttpGet]
@@ -40,9 +44,20 @@ namespace vacation_accrual_buddy.Controllers
                     vm.MaxBalance = userData.Max_Balance;
                     vm.Period = userData.Period;
 
-                    // TODO retrieve _vacationRepository data
+                    vm.PeriodList = _vacationRepository.Get(
+                        userId,
+                        DateTime.Parse(vm.StartDate).AddDays(-14),
+                        vm.Period
+                    );
 
-                    vm.SetPeriodList(new List<PayPeriod>(), vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
+                    if(vm.PeriodList.Count < vm.Period)
+                    {
+                        var startDate = DateTime.Parse(vm.StartDate).AddDays(14 * (vm.PeriodList.Count - 1)).ToString();
+                        var balance = Convert.ToDecimal(vm.PeriodList.Last().Balance);
+                        var forfeit = Convert.ToDecimal(vm.PeriodList.Last().Forfeit);
+                        // TODO pass days off variable as well
+                        vm.AppendPeriodList(vm.PeriodList, startDate, vm.MaxBalance, vm.Period - vm.PeriodList.Count, vm.Accrual, balance, forfeit, true);
+                    }
                     return View(vm);
                 }
                 return RedirectToAction("Preferences");
@@ -54,7 +69,7 @@ namespace vacation_accrual_buddy.Controllers
         [ActionName("Index")]
         public IActionResult Submit(VacationAccrualViewModel vm)
         {
-            vm.SetPeriodList(new List<PayPeriod>(), vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
+            vm.AppendPeriodList(new List<PayPeriod>(), vm.StartDate, vm.MaxBalance, vm.Period, vm.Accrual, vm.Balance);
             return View("Index", vm);
         }
 
