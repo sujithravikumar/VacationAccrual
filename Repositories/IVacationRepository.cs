@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using vacation_accrual_buddy.Models;
 namespace vacation_accrual_buddy.Repositories
 {
@@ -9,7 +10,7 @@ namespace vacation_accrual_buddy.Repositories
             DateTime startDate,
             DateTime endDate);
 
-        VacationDataModel Get(
+        List<PayPeriod> Get(
             string userId,
             DateTime startDate,
             int period);

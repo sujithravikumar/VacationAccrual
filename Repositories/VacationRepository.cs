@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
@@ -34,8 +36,8 @@ namespace vacation_accrual_buddy.Repositories
                 string query = @"SELECT EXISTS (SELECT 1
                                FROM   PUBLIC.user_data
                                WHERE  user_id = @userId
-                                      AND start_date = TO_DATE(@startDate, 'YYYY-MM-DD')
-                                      AND end_date = TO_DATE(@endDate, 'YYYY-MM-DD'))";
+                                      AND start_date = To_date(@startDate, 'YYYY-MM-DD')
+                                      AND end_date = To_date(@endDate, 'YYYY-MM-DD'))";
                 return conn.ExecuteScalar<bool>(
                                     query,
                                     new {
@@ -46,17 +48,25 @@ namespace vacation_accrual_buddy.Repositories
             }
         }
 
-        public VacationDataModel Get(
+        public List<PayPeriod> Get(
             string userId,
             DateTime startDate,
             int period)
         {
             using (IDbConnection conn = Connection)
             {
-                string query = @"SELECT *
-                                FROM PUBLIC.vacation_data
-                                WHERE user_id = @userId"; // FIXME
-                return conn.QuerySingle<VacationDataModel>(query, new { userId });
+                string query = @"SELECT   *
+                                FROM     PUBLIC.vacation_data_view
+                                WHERE    user_id = @userId
+                                AND      start_date >= To_date(@startDate, 'YYYY-MM-DD')
+                                ORDER BY start_date limit @period";
+                return conn.Query<PayPeriod>(
+                                    query,
+                                    new {
+                                        userId,
+                                        startDate = startDate.ToString("yyyy-MM-dd"),
+                                        period
+                                    }).ToList();
             }
         }
 
@@ -80,8 +90,8 @@ namespace vacation_accrual_buddy.Repositories
                                              balance,
                                              forfeit)
                                 VALUES      (@userId,
-                                             TO_DATE(@startDate, 'YYYY-MM-DD'),
-                                             TO_DATE(@endDate, 'YYYY-MM-DD'),
+                                             To_date(@startDate, 'YYYY-MM-DD'),
+                                             To_date(@endDate, 'YYYY-MM-DD'),
                                              @accrual,
                                              @take,
                                              @balance,
@@ -116,8 +126,8 @@ namespace vacation_accrual_buddy.Repositories
                                        balance = @balance,
                                        forfeit = @forfeit
                                 WHERE  user_id = @userId
-                                       AND start_date = TO_DATE(@startDate, 'YYYY-MM-DD')
-                                       AND end_date = TO_DATE(@endDate, 'YYYY-MM-DD')";
+                                       AND start_date = To_date(@startDate, 'YYYY-MM-DD')
+                                       AND end_date = To_date(@endDate, 'YYYY-MM-DD')";
                 int affectedRows = conn.Execute(
                                         query,
                                         new
