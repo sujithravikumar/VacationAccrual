@@ -86,16 +86,25 @@ namespace vacation_accrual_buddy.Models
             }
         }
 
-        public void SetPeriodList(List<PayPeriod> periodList, string selectedStartDate, int maxBalance, int periods, decimal accrual, decimal balance)
+        public void AppendPeriodList(List<PayPeriod> periodList, string selectedStartDate, int maxBalance, int periods, decimal accrual, decimal balance, decimal forfeit = 0, bool ignorePreviousPeriod = false)
         {
             if (periodList == null)
             {
                 throw new Exception("ERROR: PeriodList cannot be null");
             }
-            decimal take, forfeit = 0;
+            decimal take;
+            DateTime startDate;
 
-            //Calculate from previous pay period
-            DateTime startDate = DateTime.Parse(selectedStartDate).AddDays(-14);
+            if (ignorePreviousPeriod)
+            {
+                startDate = DateTime.Parse(selectedStartDate);
+                balance += accrual;
+            }
+            else
+            {
+                //Calculate from previous pay period
+                startDate = DateTime.Parse(selectedStartDate).AddDays(-14);
+            }
 
             for (int i = 0; i < periods; i++)
             {
