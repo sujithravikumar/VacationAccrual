@@ -75,6 +75,12 @@ namespace vacation_accrual_buddy.Controllers
             return View("Index", vm);
         }
 
+        [HttpPost]
+        public IActionResult SaveForecastData(VacationAccrualViewModel vm)
+        {
+            return Content("Done.");
+        }
+
         [HttpGet]
         [Authorize]
         public IActionResult Preferences(VacationAccrualViewModel vm)
