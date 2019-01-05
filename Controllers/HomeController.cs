@@ -54,9 +54,8 @@ namespace vacation_accrual_buddy.Controllers
                     {
                         var startDate = DateTime.Parse(vm.StartDate).AddDays(14 * (vm.PeriodList.Count - 1)).ToString();
                         var balance = Convert.ToDecimal(vm.PeriodList.Last().Balance);
-                        var forfeit = Convert.ToDecimal(vm.PeriodList.Last().Forfeit);
                         // TODO pass days off variable as well
-                        vm.AppendPeriodList(vm.PeriodList, startDate, vm.MaxBalance, vm.Period - vm.PeriodList.Count, vm.Accrual, balance, forfeit, true);
+                        vm.AppendPeriodList(vm.PeriodList, startDate, vm.MaxBalance, vm.Period - vm.PeriodList.Count + 1, vm.Accrual, balance, true);
                     }
                     return View(vm);
                 }
