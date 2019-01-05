@@ -34,7 +34,7 @@ namespace vacation_accrual_buddy.Repositories
             using (IDbConnection conn = Connection)
             {
                 string query = @"SELECT EXISTS (SELECT 1
-                               FROM   PUBLIC.user_data
+                               FROM   PUBLIC.vacation_data
                                WHERE  user_id = @userId
                                       AND start_date = To_date(@startDate, 'YYYY-MM-DD')
                                       AND end_date = To_date(@endDate, 'YYYY-MM-DD'))";
