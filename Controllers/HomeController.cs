@@ -55,9 +55,9 @@ namespace vacation_accrual_buddy.Controllers
 
                     if (vm.PeriodList.Count < vm.Period)
                     {
-                        var startDate = DateTime.Parse(vm.StartDate).AddDays(14 * (vm.PeriodList.Count - 1)).ToString();
-                        var balance = Convert.ToDecimal(vm.PeriodList.Last().Balance);
-                        var daysOff = Convert.ToDecimal(vm.DaysOff);
+                        string startDate = DateTime.Parse(vm.StartDate).AddDays(14 * (vm.PeriodList.Count - 1)).ToString();
+                        decimal balance = Convert.ToDecimal(vm.PeriodList.Last().Balance);
+                        decimal daysOff = Convert.ToDecimal(vm.DaysOff);
                         vm.AppendPeriodList(vm.PeriodList, startDate, vm.MaxBalance, vm.Period - vm.PeriodList.Count, vm.Accrual, balance, daysOff, true);
                     }
                     return View(vm);
@@ -90,6 +90,14 @@ namespace vacation_accrual_buddy.Controllers
                 vm.DaysOff = userData.Take_Days_Off % 1 == 0 ?
                             Convert.ToInt32(userData.Take_Days_Off).ToString() :
                             userData.Take_Days_Off.ToString();
+
+                List<PayPeriod> vacationData = _vacationRepository.Get(
+                    userId,
+                    DateTime.Parse(vm.StartDate).AddDays(-14),
+                    1
+                );
+
+                vm.Balance = Convert.ToDecimal(vacationData.Single().Balance);
             }
             return View(vm);
         }
@@ -108,9 +116,27 @@ namespace vacation_accrual_buddy.Controllers
                     vm.Period,
                     Convert.ToDecimal(vm.DaysOff)
                 );
+
+                _vacationRepository.Insert(
+                    userId,
+                    DateTime.Parse(vm.StartDate).AddDays(-14),
+                    DateTime.Parse(vm.StartDate).AddDays(-1),
+                    vm.Accrual,
+                    0,
+                    vm.Balance,
+                    0
+                );
             }
             else
             {
+                UserDataModel userData = _userRepository.Get(userId);
+
+                List<PayPeriod> vacationData = _vacationRepository.Get(
+                    userId,
+                    DateTime.Parse(vm.StartDate).AddDays(-14),
+                    1
+                );
+
                 _userRepository.Update(
                     userId,
                     EncodeStartDateEvenWW(vm.StartDate),
@@ -119,6 +145,25 @@ namespace vacation_accrual_buddy.Controllers
                     vm.Period,
                     Convert.ToDecimal(vm.DaysOff)
                 );
+
+                if (userData.Start_Date_Even_Ww != EncodeStartDateEvenWW(vm.StartDate) ||
+                    userData.Accrual != vm.Accrual ||
+                    userData.Max_Balance != vm.MaxBalance ||
+                    userData.Take_Days_Off != Convert.ToDecimal(vm.DaysOff) ||
+                    Convert.ToDecimal(vacationData.Single().Balance) != vm.Balance)
+                {
+                    _vacationRepository.Delete(userId);
+
+                    _vacationRepository.Insert(
+                        userId,
+                        DateTime.Parse(vm.StartDate).AddDays(-14),
+                        DateTime.Parse(vm.StartDate).AddDays(-1),
+                        vm.Accrual,
+                        0,
+                        vm.Balance,
+                        0
+                    );
+                }
             }
             return Content("Done.");
         }
