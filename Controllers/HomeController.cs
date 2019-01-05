@@ -122,7 +122,7 @@ namespace vacation_accrual_buddy.Controllers
                     );
                 }
             }
-            return Content("Done.");
+            return Content("Saved!");
         }
 
         [HttpGet]
@@ -215,7 +215,7 @@ namespace vacation_accrual_buddy.Controllers
                     );
                 }
             }
-            return Content("Done.");
+            return Content("Saved!");
         }
 
         private bool EncodeStartDateEvenWW(string StartDate)

@@ -173,7 +173,12 @@
                         type: 'POST',
                         data: VacationAccrualViewModel,
                         success: function(response) {
-
+                            if (response == "Saved!") {
+                                toastr["success"](response);
+                            }
+                            else {
+                                toastr["error"](response);
+                            }
                         }
                     });
                 });
