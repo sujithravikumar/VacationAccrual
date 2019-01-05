@@ -78,51 +78,58 @@ namespace vacation_accrual_buddy.Controllers
         [HttpPost]
         public IActionResult SaveForecastData(VacationAccrualViewModel vm)
         {
-            string userId = _userManager.GetUserId(User);
-            DateTime startDate, endDate;
-            decimal accrual, take, balance, forfeit;
-
-            _vacationRepository.Delete(userId);
-
-            for (int i = 0; i < vm.PeriodList.Count; i++)
+            try
             {
-                startDate = DateTime.Parse(vm.PeriodList[i].Period
-                    .Split(new string[] { " - " }, StringSplitOptions.None)[0].Trim());
-                endDate = DateTime.Parse(vm.PeriodList[i].Period
-                    .Split(new string[] { " - " }, StringSplitOptions.None)[1].Trim());
-                accrual = vm.PeriodList[i].Accrual;
-                take = vm.PeriodList[i].Take;
-                balance = Convert.ToDecimal(vm.PeriodList[i].Balance);
-                forfeit = Convert.ToDecimal(vm.PeriodList[i].Forfeit);
+                string userId = _userManager.GetUserId(User);
+                DateTime startDate, endDate;
+                decimal accrual, take, balance, forfeit;
 
-                if (!_vacationRepository.Exists(
-                        userId,
-                        startDate,
-                        endDate))
+                _vacationRepository.Delete(userId);
+
+                for (int i = 0; i < vm.PeriodList.Count; i++)
                 {
-                    _vacationRepository.Insert(
-                        userId,
-                        startDate,
-                        endDate,
-                        accrual,
-                        take,
-                        balance,
-                        forfeit
-                    );
+                    startDate = DateTime.Parse(vm.PeriodList[i].Period
+                        .Split(new string[] { " - " }, StringSplitOptions.None)[0].Trim());
+                    endDate = DateTime.Parse(vm.PeriodList[i].Period
+                        .Split(new string[] { " - " }, StringSplitOptions.None)[1].Trim());
+                    accrual = vm.PeriodList[i].Accrual;
+                    take = vm.PeriodList[i].Take;
+                    balance = Convert.ToDecimal(vm.PeriodList[i].Balance);
+                    forfeit = Convert.ToDecimal(vm.PeriodList[i].Forfeit);
+
+                    if (!_vacationRepository.Exists(
+                            userId,
+                            startDate,
+                            endDate))
+                    {
+                        _vacationRepository.Insert(
+                            userId,
+                            startDate,
+                            endDate,
+                            accrual,
+                            take,
+                            balance,
+                            forfeit
+                        );
+                    }
+                    else
+                    {
+                        _vacationRepository.Update(
+                            userId,
+                            startDate,
+                            endDate,
+                            take,
+                            balance,
+                            forfeit
+                        );
+                    }
                 }
-                else
-                {
-                    _vacationRepository.Update(
-                        userId,
-                        startDate,
-                        endDate,
-                        take,
-                        balance,
-                        forfeit
-                    );
-                }
+                return Content("Saved!");
             }
-            return Content("Saved!");
+            catch (Exception e)
+            {
+                return Content(e.Message);
+            }
         }
 
         [HttpGet]
@@ -155,54 +162,19 @@ namespace vacation_accrual_buddy.Controllers
         [HttpPost]
         public IActionResult SavePreferences(VacationAccrualViewModel vm)
         {
-            string userId = _userManager.GetUserId(User);
-            if(!_userRepository.Exists(userId))
+            try
             {
-                _userRepository.Insert(
-                    userId,
-                    EncodeStartDateEvenWW(vm.StartDate),
-                    vm.Accrual,
-                    vm.MaxBalance,
-                    vm.Period,
-                    Convert.ToDecimal(vm.DaysOff)
-                );
-
-                _vacationRepository.Insert(
-                    userId,
-                    DateTime.Parse(vm.StartDate).AddDays(-14),
-                    DateTime.Parse(vm.StartDate).AddDays(-1),
-                    vm.Accrual,
-                    0,
-                    vm.Balance,
-                    0
-                );
-            }
-            else
-            {
-                UserDataModel userData = _userRepository.Get(userId);
-
-                List<PayPeriod> vacationData = _vacationRepository.Get(
-                    userId,
-                    DateTime.Parse(vm.StartDate).AddDays(-14),
-                    1
-                );
-
-                _userRepository.Update(
-                    userId,
-                    EncodeStartDateEvenWW(vm.StartDate),
-                    vm.Accrual,
-                    vm.MaxBalance,
-                    vm.Period,
-                    Convert.ToDecimal(vm.DaysOff)
-                );
-
-                if (userData.Start_Date_Even_Ww != EncodeStartDateEvenWW(vm.StartDate) ||
-                    userData.Accrual != vm.Accrual ||
-                    userData.Max_Balance != vm.MaxBalance ||
-                    userData.Take_Days_Off != Convert.ToDecimal(vm.DaysOff) ||
-                    Convert.ToDecimal(vacationData.Single().Balance) != vm.Balance)
+                string userId = _userManager.GetUserId(User);
+                if (!_userRepository.Exists(userId))
                 {
-                    _vacationRepository.Delete(userId);
+                    _userRepository.Insert(
+                        userId,
+                        EncodeStartDateEvenWW(vm.StartDate),
+                        vm.Accrual,
+                        vm.MaxBalance,
+                        vm.Period,
+                        Convert.ToDecimal(vm.DaysOff)
+                    );
 
                     _vacationRepository.Insert(
                         userId,
@@ -214,8 +186,50 @@ namespace vacation_accrual_buddy.Controllers
                         0
                     );
                 }
+                else
+                {
+                    UserDataModel userData = _userRepository.Get(userId);
+
+                    List<PayPeriod> vacationData = _vacationRepository.Get(
+                        userId,
+                        DateTime.Parse(vm.StartDate).AddDays(-14),
+                        1
+                    );
+
+                    _userRepository.Update(
+                        userId,
+                        EncodeStartDateEvenWW(vm.StartDate),
+                        vm.Accrual,
+                        vm.MaxBalance,
+                        vm.Period,
+                        Convert.ToDecimal(vm.DaysOff)
+                    );
+
+                    if (userData.Start_Date_Even_Ww != EncodeStartDateEvenWW(vm.StartDate) ||
+                        userData.Accrual != vm.Accrual ||
+                        userData.Max_Balance != vm.MaxBalance ||
+                        userData.Take_Days_Off != Convert.ToDecimal(vm.DaysOff) ||
+                        Convert.ToDecimal(vacationData.Single().Balance) != vm.Balance)
+                    {
+                        _vacationRepository.Delete(userId);
+
+                        _vacationRepository.Insert(
+                            userId,
+                            DateTime.Parse(vm.StartDate).AddDays(-14),
+                            DateTime.Parse(vm.StartDate).AddDays(-1),
+                            vm.Accrual,
+                            0,
+                            vm.Balance,
+                            0
+                        );
+                    }
+                }
+                return Content("Saved!");
             }
-            return Content("Saved!");
+            catch (Exception e)
+            {
+                return Content(e.Message);
+            }
         }
 
         private bool EncodeStartDateEvenWW(string StartDate)
