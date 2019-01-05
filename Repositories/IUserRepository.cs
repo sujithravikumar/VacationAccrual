@@ -12,13 +12,15 @@ namespace vacation_accrual_buddy.Repositories
             bool cycleStartEvenWW,
             decimal accrual,
             decimal maxBalance,
-            int period);
+            int period,
+            decimal takeDaysOff);
 
         void Update(
             string userId,
             bool cycleStartEvenWW,
             decimal accrual,
             decimal maxBalance,
-            int period);
+            int period,
+            decimal takeDaysOff);
     }
 }

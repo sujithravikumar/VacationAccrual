@@ -21,7 +21,7 @@ namespace vacation_accrual_buddy.Models
         [Required]
         public decimal Balance { get; set; }
         public List<SelectListItem> DaysOffList { get; set; }
-        public int DaysOff { get; set; }
+        public string DaysOff { get; set; }
         public List<PayPeriod> PeriodList { get; set; }
 
         public VacationAccrualViewModel()
@@ -54,7 +54,7 @@ namespace vacation_accrual_buddy.Models
             daysOffList.Add(new SelectListItem { Text = "1" });
             daysOffList.Add(new SelectListItem { Text = "2" });
             this.DaysOffList = daysOffList;
-            this.DaysOff = 1;
+            this.DaysOff = "1";
         }
 
         public void SetStartDateItems()
@@ -86,7 +86,7 @@ namespace vacation_accrual_buddy.Models
             }
         }
 
-        public void AppendPeriodList(List<PayPeriod> periodList, string selectedStartDate, int maxBalance, int periods, decimal accrual, decimal balance, bool ignorePreviousPeriod = false)
+        public void AppendPeriodList(List<PayPeriod> periodList, string selectedStartDate, int maxBalance, int periods, decimal accrual, decimal balance, decimal daysOff = 1, bool ignorePreviousPeriod = false)
         {
             if (periodList == null)
             {
@@ -120,7 +120,11 @@ namespace vacation_accrual_buddy.Models
                 forfeit = 0;
                 if (balance > maxBalance)
                 {
-                    take = (8 * this.DaysOff);
+                    take = 8 * daysOff;
+                    // to get rid of decimal point .0 if it is a whole number
+                    take = take % 1 == 0 ?
+                            Convert.ToInt32(take) :
+                            take;
                     balance -= take;
                     if (balance > maxBalance)
                     {

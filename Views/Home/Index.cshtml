@@ -60,7 +60,7 @@
     <div class="section">
         @if (!SignInManager.IsSignedIn(User))
         {
-            <label id="takeMsg">Take @Html.DropDownListFor(m => m.DaysOff, Model.DaysOffList) day(s) off before it hits the max balance limit</label>
+            <label id="takeMsg">Take @Html.DropDownListFor(m => m.DaysOff, Model.DaysOffList, new { Class = "takeOff" }) day(s) off before it hits the max balance limit</label>
         }
         <table id="periodsTbl" align="center" class="table table-sm table-striped table-hover text-nowrap">
             <thead>

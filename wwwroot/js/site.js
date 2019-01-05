@@ -29,7 +29,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#periodsTbl td:nth-child(3)").each(function () {
         if (parseFloat($(this).find(".take").val()) > 0) {
-            $(this).find(".take").addClass('takeHours');
+            $(this).find(".take").addClass('takeOff');
         }
     });
 
@@ -43,10 +43,10 @@ $(document).ready(function() {
 function formatTblCells() {
     $("#periodsTbl td:nth-child(3)").each(function () {
         if (parseFloat($(this).find(".take").val()) > 0) {
-            $(this).find(".take").addClass('takeHours');
+            $(this).find(".take").addClass('takeOff');
         }
         else {
-            $(this).find(".take").removeClass('takeHours');
+            $(this).find(".take").removeClass('takeOff');
         }
     });
     $("#periodsTbl td:nth-child(5)").each(function () {

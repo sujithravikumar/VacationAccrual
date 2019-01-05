@@ -50,7 +50,8 @@ namespace vacation_accrual_buddy.Repositories
             bool startDateEvenWW,
             decimal accrual,
             decimal maxBalance,
-            int period)
+            int period,
+            decimal takeDaysOff)
         {
             using (IDbConnection conn = Connection)
             {
@@ -59,12 +60,14 @@ namespace vacation_accrual_buddy.Repositories
                                              start_date_even_ww, 
                                              accrual, 
                                              max_balance, 
-                                             period) 
+                                             period,
+                                             take_days_off) 
                                 VALUES      (@userId, 
                                              @startDateEvenWW, 
                                              @accrual, 
                                              @maxBalance, 
-                                             @period)";
+                                             @period,
+                                             @takeDaysOff)";
                 int affectedRows = conn.Execute(
                                         query,
                                         new
@@ -73,7 +76,8 @@ namespace vacation_accrual_buddy.Repositories
                                             startDateEvenWW,
                                             accrual,
                                             maxBalance,
-                                            period        
+                                            period,
+                                            takeDaysOff
                                         });
             }
         }
@@ -83,7 +87,8 @@ namespace vacation_accrual_buddy.Repositories
             bool startDateEvenWW,
             decimal accrual,
             decimal maxBalance,
-            int period)
+            int period,
+            decimal takeDaysOff)
         {
             using (IDbConnection conn = Connection)
             {
@@ -91,7 +96,8 @@ namespace vacation_accrual_buddy.Repositories
                                 SET start_date_even_ww = @startDateEvenWW,
                                     accrual = @accrual,
                                     max_balance = @maxBalance,
-                                    period = @period
+                                    period = @period,
+                                    take_days_off = @takeDaysOff
                                 WHERE user_id = @userId";
                 int affectedRows = conn.Execute(
                                         query,
@@ -101,7 +107,8 @@ namespace vacation_accrual_buddy.Repositories
                                             startDateEvenWW,
                                             accrual,
                                             maxBalance,
-                                            period
+                                            period,
+                                            takeDaysOff
                                         });
             }
         }

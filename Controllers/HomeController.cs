@@ -42,7 +42,10 @@ namespace vacation_accrual_buddy.Controllers
                     vm.StartDate = DecodeStartDateEvenWW(userData.Start_Date_Even_Ww);
                     vm.Accrual = userData.Accrual;
                     vm.MaxBalance = userData.Max_Balance;
-                    vm.Period = userData.Period;
+                    vm.Period = userData.Period + 1; // to account for the previous period extra row
+                    vm.DaysOff = userData.Take_Days_Off % 1 == 0 ?
+                                Convert.ToInt32(userData.Take_Days_Off).ToString() :
+                                userData.Take_Days_Off.ToString();
 
                     vm.PeriodList = _vacationRepository.Get(
                         userId,
@@ -50,12 +53,12 @@ namespace vacation_accrual_buddy.Controllers
                         vm.Period
                     );
 
-                    if(vm.PeriodList.Count < vm.Period)
+                    if (vm.PeriodList.Count < vm.Period)
                     {
                         var startDate = DateTime.Parse(vm.StartDate).AddDays(14 * (vm.PeriodList.Count - 1)).ToString();
                         var balance = Convert.ToDecimal(vm.PeriodList.Last().Balance);
-                        // TODO pass days off variable as well
-                        vm.AppendPeriodList(vm.PeriodList, startDate, vm.MaxBalance, vm.Period - vm.PeriodList.Count + 1, vm.Accrual, balance, true);
+                        var daysOff = Convert.ToDecimal(vm.DaysOff);
+                        vm.AppendPeriodList(vm.PeriodList, startDate, vm.MaxBalance, vm.Period - vm.PeriodList.Count, vm.Accrual, balance, daysOff, true);
                     }
                     return View(vm);
                 }
@@ -84,6 +87,9 @@ namespace vacation_accrual_buddy.Controllers
                 vm.Accrual = userData.Accrual;
                 vm.MaxBalance = userData.Max_Balance;
                 vm.Period = userData.Period;
+                vm.DaysOff = userData.Take_Days_Off % 1 == 0 ?
+                            Convert.ToInt32(userData.Take_Days_Off).ToString() :
+                            userData.Take_Days_Off.ToString();
             }
             return View(vm);
         }
@@ -99,7 +105,8 @@ namespace vacation_accrual_buddy.Controllers
                     EncodeStartDateEvenWW(vm.StartDate),
                     vm.Accrual,
                     vm.MaxBalance,
-                    vm.Period
+                    vm.Period,
+                    Convert.ToDecimal(vm.DaysOff)
                 );
             }
             else
@@ -109,7 +116,8 @@ namespace vacation_accrual_buddy.Controllers
                     EncodeStartDateEvenWW(vm.StartDate),
                     vm.Accrual,
                     vm.MaxBalance,
-                    vm.Period
+                    vm.Period,
+                    Convert.ToDecimal(vm.DaysOff)
                 );
             }
             return Content("Done.");
