@@ -31,5 +31,7 @@ namespace vacation_accrual_buddy.Repositories
             decimal take,
             decimal balance,
             decimal forfeit);
+
+        void Delete(string userId);
     }
 }

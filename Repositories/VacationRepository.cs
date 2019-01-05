@@ -141,5 +141,15 @@ namespace vacation_accrual_buddy.Repositories
                                         });
             }
         }
+
+        public void Delete(string userId)
+        {
+            using (IDbConnection conn = Connection)
+            {
+                string query = @"DELETE FROM PUBLIC.vacation_data
+                                WHERE  user_id = @userId";
+                int affectedRows = conn.Execute(query, new { userId });
+            }
+        }
     }
 }
