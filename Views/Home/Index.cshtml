@@ -97,8 +97,9 @@
         $(document).ready(function(){
             $("#DaysOff").change(function(){
                 var daysOff = this.value;
-                var accrual, take, balance, forfeit = 0;
+                var accrual, take, balance, forfeit;
                 $("#periodsTbl tr").each(function (index) {
+                    forfeit = 0;
                     take = 0;
                     if(index > 0) {
                         if(index == 1) {
@@ -112,7 +113,7 @@
                             take = 8 * daysOff;
                             balance -= take;
                             if(balance > @Model.MaxBalance){
-                                forfeit += balance - @Model.MaxBalance;
+                                forfeit = balance - @Model.MaxBalance;
                                 balance = @Model.MaxBalance;
                             }
                         }
@@ -125,8 +126,9 @@
             });
 
             $("#periodsTbl input").on('input', function(){
-                var accrual, take, balance, forfeit = 0;
+                var accrual, take, balance, forfeit;
                 $("#periodsTbl tr").each(function (index) {
+                    forfeit = 0;
                     take = parseFloat($(this).find(".take").val());
                     if(isNaN(take)) {
                         take = 0;
@@ -140,7 +142,7 @@
                             balance += accrual - take;
                         }
                         if(balance > @Model.MaxBalance){
-                            forfeit += balance - @Model.MaxBalance;
+                            forfeit = balance - @Model.MaxBalance;
                             balance = @Model.MaxBalance;
                         }
                         $(this).find(".balance").text(balance.toFixed(2));
