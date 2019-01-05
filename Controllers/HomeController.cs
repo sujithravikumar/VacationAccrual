@@ -78,6 +78,50 @@ namespace vacation_accrual_buddy.Controllers
         [HttpPost]
         public IActionResult SaveForecastData(VacationAccrualViewModel vm)
         {
+            string userId = _userManager.GetUserId(User);
+            DateTime startDate, endDate;
+            decimal accrual, take, balance, forfeit;
+
+            _vacationRepository.Delete(userId);
+
+            for (int i = 0; i < vm.PeriodList.Count; i++)
+            {
+                startDate = DateTime.Parse(vm.PeriodList[i].Period
+                    .Split(new string[] { " - " }, StringSplitOptions.None)[0].Trim());
+                endDate = DateTime.Parse(vm.PeriodList[i].Period
+                    .Split(new string[] { " - " }, StringSplitOptions.None)[1].Trim());
+                accrual = vm.PeriodList[i].Accrual;
+                take = vm.PeriodList[i].Take;
+                balance = Convert.ToDecimal(vm.PeriodList[i].Balance);
+                forfeit = Convert.ToDecimal(vm.PeriodList[i].Forfeit);
+
+                if (!_vacationRepository.Exists(
+                        userId,
+                        startDate,
+                        endDate))
+                {
+                    _vacationRepository.Insert(
+                        userId,
+                        startDate,
+                        endDate,
+                        accrual,
+                        take,
+                        balance,
+                        forfeit
+                    );
+                }
+                else
+                {
+                    _vacationRepository.Update(
+                        userId,
+                        startDate,
+                        endDate,
+                        take,
+                        balance,
+                        forfeit
+                    );
+                }
+            }
             return Content("Done.");
         }
 
