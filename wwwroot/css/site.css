@@ -112,3 +112,7 @@ body {
 .section {
     padding-top: 20px;
 }
+
+.toast-top-right {
+    margin-top: 4%;
+}
