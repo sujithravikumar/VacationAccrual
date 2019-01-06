@@ -65,6 +65,10 @@
     <script>
         $(document).ready(function() {
             $("#saveBtn").click(function() {
+                var btn = $(this);
+                btn.prop('disabled', true);
+                btn.html('<i class="fas fa-sync-alt fa-spin"></i> Save');
+
                 var VacationAccrualViewModel = {
                     StartDate: $("#StartDate").val(),
                     Accrual: $("#Accrual").val(),
@@ -79,6 +83,8 @@
                     type: 'POST',
                     data: VacationAccrualViewModel,
                     success: function(response) {
+                        btn.html('Save');
+                        btn.prop('disabled', false);
                         if (response == "Saved!") {
                             toastr["success"](response);
                         }

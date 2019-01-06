@@ -153,6 +153,10 @@
             });
 
             $("#saveBtn").click(function() {
+                    var btn = $(this);
+                    btn.prop('disabled', true);
+                    btn.html('<i class="fas fa-sync-alt fa-spin"></i> Save');
+
                     var tbl = $('#periodsTbl tr:has(td)').map(function(i, v) {
                         var $td =  $('td', this);
                             return {
@@ -173,6 +177,8 @@
                         type: 'POST',
                         data: VacationAccrualViewModel,
                         success: function(response) {
+                            btn.html('Save');
+                            btn.prop('disabled', false);
                             if (response == "Saved!") {
                                 toastr["success"](response);
                             }

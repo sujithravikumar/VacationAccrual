@@ -116,3 +116,7 @@ body {
 .toast-top-right {
     margin-top: 4%;
 }
+
+#saveBtn {
+    width: 80px;
+}
