@@ -84,7 +84,17 @@ namespace vacation_accrual_buddy.Controllers
                 DateTime startDate, endDate;
                 decimal accrual, take, balance, forfeit;
 
-                _vacationRepository.Delete(userId);
+                List<PayPeriod> vacationData = _vacationRepository.Get(
+                    userId,
+                    DateTime.Parse(vm.PeriodList.First().Period
+                        .Split(new string[] { " - " }, StringSplitOptions.None)[0].Trim()),
+                    99 // more than the max period
+                );
+
+                if (vm.PeriodList.Count != vacationData.Count)
+                {
+                    _vacationRepository.Delete(userId);
+                }
 
                 for (int i = 0; i < vm.PeriodList.Count; i++)
                 {
@@ -97,10 +107,7 @@ namespace vacation_accrual_buddy.Controllers
                     balance = Convert.ToDecimal(vm.PeriodList[i].Balance);
                     forfeit = Convert.ToDecimal(vm.PeriodList[i].Forfeit);
 
-                    if (!_vacationRepository.Exists(
-                            userId,
-                            startDate,
-                            endDate))
+                    if (vm.PeriodList.Count != vacationData.Count)
                     {
                         _vacationRepository.Insert(
                             userId,
