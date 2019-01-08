@@ -62,6 +62,7 @@ namespace vacation_accrual_buddy.Controllers
                     }
                     return View(vm);
                 }
+                TempData["FirstTimeLogin"] = true;
                 return RedirectToAction("Preferences");
             }
             return View(vm);

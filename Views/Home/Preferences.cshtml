@@ -64,6 +64,12 @@
 @section Scripts {
     <script>
         $(document).ready(function() {
+
+            @if (TempData["FirstTimeLogin"] != null && (bool)TempData["FirstTimeLogin"])
+            {
+                @:toastr["info"]("First, let's set your preferences");
+            }
+
             $("#saveBtn").click(function() {
                 var btn = $(this);
                 btn.prop('disabled', true);
