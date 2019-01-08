@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
@@ -33,14 +34,12 @@ namespace vacation_accrual_buddy
 
             using (var client = new SmtpClient(host, port))
             {
-                // FIXME: Uncomment the following before releasing to production
-
                 // Pass SMTP credentials
-                //client.Credentials =
-                //new NetworkCredential(username, password);
+                client.Credentials =
+                    new NetworkCredential(username, password);
 
                 // Enable SSL encryption
-                //client.EnableSsl = true;
+                client.EnableSsl = true;
 
                 try
                 {
