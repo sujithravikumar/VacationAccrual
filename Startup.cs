@@ -39,7 +39,7 @@ namespace vacation_accrual_buddy
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration["CUSTOMCONNSTR_Database"]));
+                options.UseNpgsql(Configuration["Database_ConnStr"]));
 
             services.AddDefaultIdentity<IdentityUser>(config =>
                 {

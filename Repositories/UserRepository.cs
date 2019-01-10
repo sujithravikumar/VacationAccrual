@@ -19,7 +19,7 @@ namespace vacation_accrual_buddy.Repositories
         {
             get
             {
-                return new NpgsqlConnection(_configuration["CUSTOMCONNSTR_Database"]);
+                return new NpgsqlConnection(_configuration["Database_ConnStr"]);
             }
         }
 
