@@ -7,10 +7,8 @@ sudo: required
 git:
    depth: false
 
-install:
- - dotnet restore
-
 script:
+ - dotnet restore
  - dotnet build --configuration Release
 
 deploy:
