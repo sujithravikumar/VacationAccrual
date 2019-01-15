@@ -5,7 +5,7 @@ dist: xenial
 sudo: required
 
 git:
-   depth: 99999
+   depth: false
 
 install:
  - dotnet restore
