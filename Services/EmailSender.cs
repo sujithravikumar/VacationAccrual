@@ -1,16 +1,23 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace vacation_accrual_buddy
 {
     public class EmailSender : IEmailSender
     {
-        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
+        private readonly ILogger<EmailSender> _logger;
+
+        public EmailSender(
+            IOptions<AuthMessageSenderOptions> optionsAccessor,
+            ILogger<EmailSender> logger)
         {
             Options = optionsAccessor.Value;
+            _logger = logger;
         }
 
         public AuthMessageSenderOptions Options { get; } //set only via Secret Manager
@@ -45,9 +52,9 @@ namespace vacation_accrual_buddy
                 {
                     await client.SendMailAsync(message);
                 }
-                catch
+                catch (Exception e)
                 {
-                    // TODO: Add some logging
+                    _logger.LogError(e.Message);
                     throw;
                 }
             }

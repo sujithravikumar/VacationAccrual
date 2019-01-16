@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using vacation_accrual_buddy.Models;
 using vacation_accrual_buddy.Repositories;
 
@@ -17,17 +18,20 @@ namespace vacation_accrual_buddy.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserRepository _userRepository;
         private readonly IVacationRepository _vacationRepository;
+        private readonly ILogger<HomeController> _logger;
 
         public HomeController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             IUserRepository userRepository,
-            IVacationRepository vacationRepository)
+            IVacationRepository vacationRepository,
+            ILogger<HomeController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _userRepository = userRepository;
             _vacationRepository = vacationRepository;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -136,6 +140,7 @@ namespace vacation_accrual_buddy.Controllers
             }
             catch (Exception e)
             {
+                _logger.LogError(e.Message);
                 return Content(e.Message);
             }
         }
@@ -236,6 +241,7 @@ namespace vacation_accrual_buddy.Controllers
             }
             catch (Exception e)
             {
+                _logger.LogError(e.Message);
                 return Content(e.Message);
             }
         }
