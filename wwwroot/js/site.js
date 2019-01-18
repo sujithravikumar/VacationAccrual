@@ -32,6 +32,15 @@
       "showMethod": "fadeIn",
       "hideMethod": "fadeOut"
     }
+    if (!$("#ReceiveEmailReminder").is(":checked")) {
+        $('#ReceiveDaysBefore').prop('disabled', true);
+    }
+    $("input[type='checkbox']").change(function() {
+        $('#ReceiveDaysBefore').prop('disabled', true);
+        if(this.checked) {
+            $('#ReceiveDaysBefore').prop('disabled', false);
+        }
+    });    
 });
 
 $(document).ready(function() {
