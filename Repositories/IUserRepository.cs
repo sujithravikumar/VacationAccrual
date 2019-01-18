@@ -13,7 +13,9 @@ namespace vacation_accrual_buddy.Repositories
             decimal accrual,
             decimal maxBalance,
             int period,
-            decimal takeDaysOff);
+            decimal takeDaysOff,
+            bool emailAlertEnabled,
+            int emailAlertDaysBefore);
 
         void Update(
             string userId,
@@ -21,6 +23,8 @@ namespace vacation_accrual_buddy.Repositories
             decimal accrual,
             decimal maxBalance,
             int period,
-            decimal takeDaysOff);
+            decimal takeDaysOff,
+            bool emailAlertEnabled,
+            int emailAlertDaysBefore);
     }
 }

@@ -51,7 +51,9 @@ namespace vacation_accrual_buddy.Repositories
             decimal accrual,
             decimal maxBalance,
             int period,
-            decimal takeDaysOff)
+            decimal takeDaysOff,
+            bool emailAlertEnabled,
+            int emailAlertDaysBefore)
         {
             using (IDbConnection conn = Connection)
             {
@@ -61,13 +63,17 @@ namespace vacation_accrual_buddy.Repositories
                                              accrual, 
                                              max_balance, 
                                              period,
-                                             take_days_off) 
+                                             take_days_off,
+                                             email_alert_enabled,
+                                             email_alert_days_before) 
                                 VALUES      (@userId, 
                                              @startDateEvenWW, 
                                              @accrual, 
                                              @maxBalance, 
                                              @period,
-                                             @takeDaysOff)";
+                                             @takeDaysOff,
+                                             @emailAlertEnabled,
+                                             @emailAlertDaysBefore)";
                 int affectedRows = conn.Execute(
                                         query,
                                         new
@@ -77,7 +83,9 @@ namespace vacation_accrual_buddy.Repositories
                                             accrual,
                                             maxBalance,
                                             period,
-                                            takeDaysOff
+                                            takeDaysOff,
+                                            emailAlertEnabled,
+                                            emailAlertDaysBefore
                                         });
             }
         }
@@ -88,7 +96,9 @@ namespace vacation_accrual_buddy.Repositories
             decimal accrual,
             decimal maxBalance,
             int period,
-            decimal takeDaysOff)
+            decimal takeDaysOff,
+            bool emailAlertEnabled,
+            int emailAlertDaysBefore)
         {
             using (IDbConnection conn = Connection)
             {
@@ -97,7 +107,9 @@ namespace vacation_accrual_buddy.Repositories
                                     accrual = @accrual,
                                     max_balance = @maxBalance,
                                     period = @period,
-                                    take_days_off = @takeDaysOff
+                                    take_days_off = @takeDaysOff,
+                                    email_alert_enabled = @emailAlertEnabled,
+                                    email_alert_days_before = @emailAlertDaysBefore
                                 WHERE user_id = @userId";
                 int affectedRows = conn.Execute(
                                         query,
@@ -108,7 +120,9 @@ namespace vacation_accrual_buddy.Repositories
                                             accrual,
                                             maxBalance,
                                             period,
-                                            takeDaysOff
+                                            takeDaysOff,
+                                            emailAlertEnabled,
+                                            emailAlertDaysBefore
                                         });
             }
         }
