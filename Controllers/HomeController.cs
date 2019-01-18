@@ -160,6 +160,8 @@ namespace vacation_accrual_buddy.Controllers
                 vm.DaysOff = userData.Take_Days_Off % 1 == 0 ?
                             Convert.ToInt32(userData.Take_Days_Off).ToString() :
                             userData.Take_Days_Off.ToString();
+                vm.ReceiveEmailReminder = userData.Email_Alert_Enabled;
+                vm.ReceiveDaysBefore = userData.Email_Alert_Days_Before;
 
                 List<PayPeriod> vacationData = _vacationRepository.Get(
                     userId,
@@ -186,7 +188,9 @@ namespace vacation_accrual_buddy.Controllers
                         vm.Accrual,
                         vm.MaxBalance,
                         vm.Period,
-                        Convert.ToDecimal(vm.DaysOff)
+                        Convert.ToDecimal(vm.DaysOff),
+                        vm.ReceiveEmailReminder,
+                        vm.ReceiveDaysBefore
                     );
 
                     _vacationRepository.Insert(
@@ -215,7 +219,9 @@ namespace vacation_accrual_buddy.Controllers
                         vm.Accrual,
                         vm.MaxBalance,
                         vm.Period,
-                        Convert.ToDecimal(vm.DaysOff)
+                        Convert.ToDecimal(vm.DaysOff),
+                        vm.ReceiveEmailReminder,
+                        vm.ReceiveDaysBefore
                     );
 
                     if (userData.Start_Date_Even_Ww != EncodeStartDateEvenWW(vm.StartDate) ||
