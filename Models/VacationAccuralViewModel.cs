@@ -23,12 +23,16 @@ namespace vacation_accrual_buddy.Models
         public List<SelectListItem> DaysOffList { get; set; }
         public string DaysOff { get; set; }
         public List<PayPeriod> PeriodList { get; set; }
+        public bool ReceiveEmailReminder { get; set; }
+        public List<SelectListItem> ReceiveDaysBeforeList { get; set; }
+        public int ReceiveDaysBefore { get; set; }
 
         public VacationAccrualViewModel()
         {
             SetStartDateItems();
             SetPeriods();
             SetDaysOff();
+            SetReceiveDaysBefore();
             this.MaxBalance = 120;
             this.Accrual = 6;
             this.Balance = 100;
@@ -55,6 +59,17 @@ namespace vacation_accrual_buddy.Models
             daysOffList.Add(new SelectListItem { Text = "2" });
             this.DaysOffList = daysOffList;
             this.DaysOff = "1";
+        }
+
+        public void SetReceiveDaysBefore()
+        {
+            List<SelectListItem> receiveDaysBeforeList = new List<SelectListItem>();
+            for (int i=1; i<14; i++)
+            {
+                receiveDaysBeforeList.Add(new SelectListItem { Text = $"{i}" });
+            }
+            this.ReceiveDaysBeforeList = receiveDaysBeforeList;
+            this.ReceiveDaysBefore = 1;
         }
 
         public void SetStartDateItems()
