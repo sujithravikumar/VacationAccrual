@@ -1,30 +1,33 @@
-# Vacation Accrual Forecast Calculator
+# Vacation Accrual Buddy
 
-A calculator used for forecasting the vacation accrual for the pay periods. 
+A buddy to manage your vacation accruals.
 
-## Definitions
+Vacation Accrual Buddy provides:
+* A simple way of forecasting your vacation accruals.
+* A forecast of when you need to take vacation in order to prevent forfeiting of the accruals.
+* Storing and retrieving of your vacation data.
+* Forecasting your accruals and balances periodically in the background.
+* Automated reminder emails to you to take vacation.
+* The tool and ability to plan your vacations better.
 
-### Input Values
-* Start Date (Unit: Date) - Start date (Sunday) of the current pay period (2 weeks interval)
-* Max Balance (Unit: Hours) - Maximum balance hours limit above which accrual will be forfeited
-* Period (Unit: Number) - Number of pay periods to be displayed for forecasting
-* Accrual (Unit: Hours) - Accrual hours per pay period
-* Balance (Unit: Hours) - Balance hours of previous pay period from start date
+## Build Status
 
-### Result Table
-* Take days off (Unit: Days) - Take number of days off before it hits the max balance limit (1 day = 8 hours)
-* Period - Pay periods (2 weeks interval)
-* Accrual - Accrual hours for a given pay period
-* Take (Unit: Hours) - Number of hours that you're planning to take off for a given pay period
-* Balance - Balance hours for a given pay period (capped at max balance limit)
-* Forefeit - Number of hours lost for a given pay period due to balance accrual exceeding the max limit
+| Build server | Platform | Build status
+| --- | --- | ---
+| Travis CI | `Linux` | [![Build Status](https://travis-ci.org/sujithravikumar/vacation-accrual-buddy.svg?branch=master)](https://travis-ci.org/sujithravikumar/vacation-accrual-buddy)
 
-## URL Arguments for Input Values
+## Software Environment
 
-Input | Argument | Example
---- | --- | ---
-Start Date | `StartDate` | StartDate=05%2F06%2F18
-Max Balance | `MaxBalance` | MaxBalance=120
-Period | `Period` | Period=8
-Accrual | `Accrual` | Accrual=6
-Balance | `Balance` | Balance=100
+| Category | Platform
+| --- | ---
+| Source Code Hosting | [GitHub](https://github.com/)
+| Builds & Deployments | [Travis CI](https://travis-ci.org/)
+| App Framework | [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/)
+| App Hosting | [Azure App Service](https://azure.microsoft.com/en-us/services/app-service/)
+| App Analytics | [Google Analytics](https://analytics.google.com/analytics/web/)
+| Database | [PostgreSQL](https://www.postgresql.org/)
+| Database Hosting | [Amazon RDS](https://aws.amazon.com/rds/)
+
+## License
+
+Licensed under the [MIT](LICENSE) License.
