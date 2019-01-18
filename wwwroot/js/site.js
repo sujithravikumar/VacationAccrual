@@ -1,4 +1,5 @@
 ﻿$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
     $("#MaxBalance").spinner({
         min: 0,
         max: 200

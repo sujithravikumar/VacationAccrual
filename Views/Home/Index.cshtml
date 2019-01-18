@@ -20,31 +20,31 @@
         <div class="row justify-content-md-center section">
             <div class="col-md-auto">
                 <div class="form-group">
-                    <label>Start date</label>
+                    <label data-toggle="tooltip" title="Start date of the current pay period.">Start date</label>
                     @Html.DropDownListFor(m => m.StartDate, Model.StartDateList)
                 </div>
             </div>
             <div class="col-md-auto">
                 <div class="form-group">
-                    <label>Accrual</label>
+                    <label data-toggle="tooltip" title="Accrual hours per pay period.">Accrual</label>
                     @Html.TextBoxFor(m => m.Accrual, new { @maxlength = "4", @class = "textbox" })
                 </div>
             </div>
             <div class="col-md-auto">
                 <div class="form-group">
-                    <label>Max balance</label>
+                    <label data-toggle="tooltip" title="Maximum balance hours limit.">Max balance</label>
                     @Html.TextBoxFor(m => m.MaxBalance, new { @maxlength = "3", @class = "textbox" })
                 </div>
             </div>
             <div class="col-md-auto">
                 <div class="form-group">
-                    <label>Balance</label>
+                    <label data-toggle="tooltip" title="Balance hours of previous pay period.">Balance</label>
                     @Html.TextBoxFor(m => m.Balance, new { @maxlength = "6", @class = "textbox" })
                 </div>
             </div>
             <div class="col-md-auto">
                 <div class="form-group">
-                    <label>Period</label>
+                    <label data-toggle="tooltip" title="Number of future pay periods to be forecasted.">Period</label>
                     @Html.DropDownListFor(m => m.Period, Model.Periods)
                 </div>
             </div>
