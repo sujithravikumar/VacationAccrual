@@ -2,6 +2,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3722391d5a33499caf9521b7875505d4)](https://www.codacy.com/app/sujithravikumar/vacation-accrual-buddy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sujithravikumar/vacation-accrual-buddy&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/sujithravikumar/vacation-accrual-buddy/badge)](https://www.codefactor.io/repository/github/sujithravikumar/vacation-accrual-buddy)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 A buddy to manage your vacation accruals.
 
@@ -25,12 +26,29 @@ Vacation Accrual Buddy provides:
 | Category | Platform
 | --- | ---
 | Source Code Hosting | [GitHub](https://github.com/)
-| Builds & Deployments | [Travis CI](https://travis-ci.org/)
-| App Framework | [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/)
-| App Hosting | [Azure App Service](https://azure.microsoft.com/en-us/services/app-service/)
-| App Analytics | [Google Analytics](https://analytics.google.com/analytics/web/)
+| Code Quality | [CodeFactor](https://www.codefactor.io/)
+| Code Quality & Code Review | [Codacy](https://www.codacy.com/)
+| Build | [AppVeyor](https://www.appveyor.com/)
+| Build & Deployment | [Travis CI](https://travis-ci.org/)
+| Application Framework | [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/)
+| Application Hosting | [Azure App Service](https://azure.microsoft.com/en-us/services/app-service/)
+| Application Analytics | [Google Analytics](https://analytics.google.com/analytics/web/)
 | Database | [PostgreSQL](https://www.postgresql.org/)
 | Database Hosting | [Amazon RDS](https://aws.amazon.com/rds/)
+
+## Open Source Components
+
+| Type | Software
+| --- | ---
+| Web Framework | [AspNetCore](https://github.com/aspnet/AspNetCore)
+| ORM | [EntityFrameworkCore](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL)
+| ORM | [Dapper](https://github.com/StackExchange/Dapper)
+| Logging | [NLog](https://github.com/NLog/NLog)
+| Front-end Framework | [Bootstrap](https://github.com/twbs/bootstrap)
+| Font and Icon Toolkit | [FontAwesome](https://github.com/FortAwesome/Font-Awesome)
+| JavaScript Library | [jQuery](https://github.com/jquery/jquery)
+| JavaScript Library | [toastr](https://github.com/CodeSeven/toastr)
+| Plug-in | [jQuery UI](https://github.com/jquery/jquery-ui)
 
 ## License
 
