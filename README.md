@@ -1,4 +1,7 @@
 # Vacation Accrual Buddy
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3722391d5a33499caf9521b7875505d4)](https://www.codacy.com/app/sujithravikumar/vacation-accrual-buddy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sujithravikumar/vacation-accrual-buddy&amp;utm_campaign=Badge_Grade)
+[![CodeFactor](https://www.codefactor.io/repository/github/sujithravikumar/vacation-accrual-buddy/badge)](https://www.codefactor.io/repository/github/sujithravikumar/vacation-accrual-buddy)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 A buddy to manage your vacation accruals.
 
@@ -14,7 +17,8 @@ Vacation Accrual Buddy provides:
 
 | Build server | Platform | Build status
 | --- | --- | ---
-| Travis CI | `Linux` | [![Build Status](https://travis-ci.org/sujithravikumar/vacation-accrual-buddy.svg?branch=master)](https://travis-ci.org/sujithravikumar/vacation-accrual-buddy)
+| AppVeyor | Windows | [![Build status](https://ci.appveyor.com/api/projects/status/cq4rwvp5tbdij53v?svg=true)](https://ci.appveyor.com/project/sujithravikumar/vacation-accrual-buddy)
+| Travis CI | Linux | [![Build Status](https://travis-ci.org/sujithravikumar/vacation-accrual-buddy.svg?branch=master)](https://travis-ci.org/sujithravikumar/vacation-accrual-buddy)
 
 ## Software Environment
 

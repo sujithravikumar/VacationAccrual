@@ -1,10 +1,13 @@
 ﻿version: 1.0.{build}
 image: Visual Studio 2017
+
 branches:
   only:
     - master
+
 before_build:
   - dotnet --version
-  - dotnet restore --verbosity m
+
 build_script:
-  - dotnet build -c Debug /p:DebugType=full
+  - dotnet restore
+  - dotnet build --configuration Release
