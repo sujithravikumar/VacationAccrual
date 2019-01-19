@@ -53,10 +53,7 @@ namespace vacation_accrual_buddy.Areas.Identity.Pages.Account
                     $@"Hello {Input.Email}!<br><br>
                     Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' target='_blank'>clicking here</a>.<br><br>
                     If you received this message but did not attempt to register, 
-                    you can safely disregard this email -- no further action is required.<br><br>
-                    Thank you,<br>
-                    The Vacation Accrual Buddy Team<br><br>
-                    Never forfeit a vacation day!"
+                    you can safely disregard this email -- no further action is required."
                 );
 
                 return RedirectToPage("./RegisterConfirmation");
