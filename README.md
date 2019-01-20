@@ -21,6 +21,14 @@ Vacation Accrual Buddy provides:
 | AppVeyor | Windows | [![Build status](https://ci.appveyor.com/api/projects/status/cq4rwvp5tbdij53v?svg=true)](https://ci.appveyor.com/project/sujithravikumar/vacation-accrual-buddy)
 | Travis CI | Linux | [![Build Status](https://travis-ci.org/sujithravikumar/vacation-accrual-buddy.svg?branch=master)](https://travis-ci.org/sujithravikumar/vacation-accrual-buddy)
 
+## Continuous Integration and Continuous Delivery (CI/CD) Pipeline
+
+![CI CD Pipeline](Images/CI_CD_Pipeline.png "CI/CD Pipeline")
+
+## Software Architecture
+
+![Software Architecture](Images/Software_Architecture.png "Software Architecture")
+
 ## Software Environment
 
 | Category | Platform
@@ -49,6 +57,18 @@ Vacation Accrual Buddy provides:
 | JavaScript Library | [jQuery](https://github.com/jquery/jquery)
 | JavaScript Library | [toastr](https://github.com/CodeSeven/toastr)
 | Plug-in | [jQuery UI](https://github.com/jquery/jquery-ui)
+
+## Screenshots
+
+![Home](Images/Screen_Shot_1_Home.png "Home")
+
+![Register](Images/Screen_Shot_2_Register.png "Register")
+
+![Login](Images/Screen_Shot_3_Login.png "Login")
+
+![Preferences](Images/Screen_Shot_4_Preferences.png "Preferences")
+
+![Logged in Home](Images/Screen_Shot_5_Logged_in_Home.png "Logged in Home")
 
 ## License
 
