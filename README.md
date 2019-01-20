@@ -26,8 +26,8 @@ Vacation Accrual Buddy provides:
 | Category | Platform
 | --- | ---
 | Source Code Hosting | [GitHub](https://github.com/)
-| Code Quality | [CodeFactor](https://www.codefactor.io/)
 | Code Quality & Code Review | [Codacy](https://www.codacy.com/)
+| Code Quality & Code Review | [CodeFactor](https://www.codefactor.io/)
 | Build | [AppVeyor](https://www.appveyor.com/)
 | Build & Deployment | [Travis CI](https://travis-ci.org/)
 | Application Framework | [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/)
