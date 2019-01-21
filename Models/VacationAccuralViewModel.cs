@@ -33,9 +33,9 @@ namespace vacation_accrual_buddy.Models
             SetPeriods();
             SetDaysOff();
             SetReceiveDaysBefore();
-            this.MaxBalance = 120;
-            this.Accrual = 6;
-            this.Balance = 100;
+            MaxBalance = 120;
+            Accrual = 6;
+            Balance = 100;
         }
 
         public void SetPeriods()
@@ -46,8 +46,8 @@ namespace vacation_accrual_buddy.Models
             periodsList.Add(new SelectListItem { Text = "12" });
             periodsList.Add(new SelectListItem { Text = "16" });
             periodsList.Add(new SelectListItem { Text = "20" });
-            this.Periods = periodsList;
-            this.Period = 8;
+            Periods = periodsList;
+            Period = 8;
         }
 
         public void SetDaysOff()
@@ -57,8 +57,8 @@ namespace vacation_accrual_buddy.Models
             daysOffList.Add(new SelectListItem { Text = "0.5" });
             daysOffList.Add(new SelectListItem { Text = "1" });
             daysOffList.Add(new SelectListItem { Text = "2" });
-            this.DaysOffList = daysOffList;
-            this.DaysOff = "1";
+            DaysOffList = daysOffList;
+            DaysOff = "1";
         }
 
         public void SetReceiveDaysBefore()
@@ -68,8 +68,8 @@ namespace vacation_accrual_buddy.Models
             {
                 receiveDaysBeforeList.Add(new SelectListItem { Text = $"{i}" });
             }
-            this.ReceiveDaysBeforeList = receiveDaysBeforeList;
-            this.ReceiveDaysBefore = 1;
+            ReceiveDaysBeforeList = receiveDaysBeforeList;
+            ReceiveDaysBefore = 1;
         }
 
         public void SetStartDateItems()
@@ -80,25 +80,19 @@ namespace vacation_accrual_buddy.Models
             int diff = DayOfWeek.Sunday - startDate.DayOfWeek;
             DateTime weekBegin = startDate.AddDays(diff);
 
-            for (int i = 1; i >= 0; i--)
-            {
-                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-i * 7).ToString("yyyy-MM-dd") });
-            }
-
-            this.StartDateList = startDateList;
-
             var calendar = new GregorianCalendar();
             var weekNumber = calendar.GetWeekOfYear(weekBegin, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
             int biweeklyKey = weekNumber % 2;
 
             if (biweeklyKey == 0)
             {
-                this.StartDate = weekBegin.ToString("yyyy-MM-dd");
+                startDateList.Add(new SelectListItem { Text = weekBegin.ToString("yyyy-MM-dd") });
             }
             else
             {
-                this.StartDate = weekBegin.AddDays(-7).ToString("yyyy-MM-dd");
+                startDateList.Add(new SelectListItem { Text = weekBegin.AddDays(-7).ToString("yyyy-MM-dd") });
             }
+            StartDateList = startDateList;
         }
 
         public void AppendPeriodList(List<PayPeriod> periodList, string selectedStartDate, int maxBalance, int periods, decimal accrual, decimal balance, decimal daysOff = 1, bool ignorePreviousPeriod = false)
@@ -151,7 +145,7 @@ namespace vacation_accrual_buddy.Models
                 startDate = startDate.AddDays(14);
                 balance += accrual;
             }
-            this.PeriodList = periodList;
+            PeriodList = periodList;
         }
     }
 }
